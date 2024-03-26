@@ -1,12 +1,10 @@
 <?php
 require 'model/connection.php';
 
-// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nim = $_POST["nim"];
     $password = $_POST["password"];
 
-    // Prepare and execute the SQL query to fetch the user's data
     $stmt = $conn->prepare("SELECT nim, Password FROM user WHERE nim = ?");
     $stmt->bind_param("s", $nim);
     $stmt->execute();

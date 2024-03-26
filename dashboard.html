@@ -10,6 +10,7 @@
   <header>
     <h1>Welcome to Your Dashboard</h1>
     <button id="logoutBtn">Logout</button>
+    <button id="mata_kuliah">Mata kuliah</button>
     <select id="settingsDropdown">
       <option selected disabled>Settings</option>
       <option value="change_email.html">Change Email</option>
@@ -60,13 +61,18 @@ select option[disabled] {
 document.addEventListener('DOMContentLoaded', function() {
   const logoutBtn = document.getElementById('logoutBtn');
   const settingsDropdown = document.getElementById('settingsDropdown');
+  const mata_kuliah = document.getElementById('mata_kuliah');
+
 
   // Add event listener for logout button
   logoutBtn.addEventListener('click', function() {
     // Redirect user to login page
     window.location.href = 'index.html';
   });
-
+  mata_kuliah.addEventListener('click', function() {
+    // Redirect user to login page
+    window.location.href = 'mata_kuliah.php';
+  });
   // Add event listener for settings dropdown
   settingsDropdown.addEventListener('change', function() {
     // Redirect user to the selected settings page

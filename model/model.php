@@ -19,7 +19,7 @@ class Model {
     }
 
     public function getClassData() {
-        $sql_kelas = "SELECT kode_kelas, mata_kuliah, dosen_pengampu, waktu FROM kelas_teknik_informatika";
+        $sql_kelas = "SELECT kode_kelas, mata_kuliah, dosen, waktu FROM kelas_teknik_informatika";
         $result_kelas = $this->conn->query($sql_kelas);
         $kelas = [];
 
@@ -59,6 +59,6 @@ class Model {
         } else {
             return "Error: " . $insert_query . "<br>" . mysqli_error($this->conn);
         }
-    }
+    } 
 }
 ?>

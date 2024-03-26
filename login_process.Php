@@ -12,14 +12,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if the user exists
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $stored_password);
+        $stmt->bind_result($nim, $stored_password);
         $stmt->fetch();
     
         // Verify the password
         if ($password === $stored_password) {
             // Password is correct, log the user in
             session_start();
-            $_SESSION["user_id"] = $id;
+            $_SESSION["nim"] = $nim;
             echo "<script>alert('Login Berhasil');</script>"; 
             header("Location: dashboard.html");
             

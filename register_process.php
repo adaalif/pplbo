@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "connection.php";
+require "model/connection.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
 

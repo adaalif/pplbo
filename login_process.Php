@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require 'model/connection.php';
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

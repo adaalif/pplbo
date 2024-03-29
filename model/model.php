@@ -19,7 +19,7 @@ class Model {
     }
 
     public function getClassData() {
-        $sql_kelas = "SELECT kode_kelas, mata_kuliah, dosen, waktu FROM kelas_teknik_informatika";
+        $sql_kelas = "SELECT kode_kelas, mata_kuliah, dosen, waktu FROM kelas";
         $result_kelas = $this->conn->query($sql_kelas);
         $kelas = [];
 

@@ -19,18 +19,20 @@ class matakuliah {
         return $result->num_rows == 1;
     }
 
-    public function getClassData() {
-        $sql_kelas = "SELECT kode_kelas, mata_kuliah, dosen, waktu FROM kelas";
-        $result_kelas = $this->conn->query($sql_kelas);
-        $kelas = [];
+    public function getMataKuliah() {
+        // Query untuk mendapatkan daftar mata kuliah dari database
+        $sql = "SELECT kode_kelas, mata_kuliah, dosen, waktu FROM kelas";
+        $result = $this->conn->query($sql);
 
-        if ($result_kelas->num_rows > 0) {
-            while($row_kelas = $result_kelas->fetch_assoc()) {
-                $kelas[] = $row_kelas;
+        $mata_kuliah = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $mata_kuliah[] = $row;
             }
         }
 
-        return $kelas;
+        return $mata_kuliah;
     }
 }
 ?>

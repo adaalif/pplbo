@@ -50,20 +50,20 @@ $kelas = $controller->getClassData();
 <body>
 
 <h2>Pilih Mata Kuliah</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Kode Kelas</th>
-            <th>Mata Kuliah</th>
-            <th>Dosen Pengampu</th>
-            <th>Waktu</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
-        <?php foreach ($kelas as $row): ?>
+<form method="post" action="pemilihan_kelas_process.php">
+    <table>
+        <thead>
+            <tr>
+                <th>Kode Kelas</th>
+                <th>Mata Kuliah</th>
+                <th>Dosen Pengampu</th>
+                <th>Waktu</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
+            <?php foreach ($kelas as $row): ?>
                 <tr>
                     <td><?= $row['kode_kelas'] ?></td>
                     <td><?= $row['mata_kuliah'] ?></td>
@@ -75,5 +75,6 @@ $kelas = $controller->getClassData();
         </tbody>
     </table>
     <input type="submit" name="submit" value="Pilih Mata Kuliah">
+</form>
 </body>
 </html>

@@ -20,6 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, log the user in
             session_start();
             $_SESSION["nim"] = $nim;
+            
             echo "<script>alert('Login Berhasil');</script>"; 
             header("Location: dashboard.html");
             

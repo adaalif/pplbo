@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'contr/contr.php';
+require_once 'contr/register-contr.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nim = $_POST['nim'];
@@ -12,7 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<script>alert('$result');</script>";
     echo "<script>window.location.replace('register.html');</script>";
 } else {
-    // Redirect to register.php if it's not a POST request
     header("Location: register.html");
     exit;
 }

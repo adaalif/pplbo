@@ -7,9 +7,10 @@ $controller = new Mahasiswa_Model();
 
 // Periksa sesi login
 $controller->checkLoginSession();
+$nim = $_SESSION['nim'];
 
 // Ambil data kelas
-$kelas = $controller->getAllKelas();
+$kelas = $controller->getAllKelasbyNIM($nim);
 ?>
 
 <!DOCTYPE html>

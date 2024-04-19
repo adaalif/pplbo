@@ -34,14 +34,7 @@ class matakuliah {
 
         return $mata_kuliah;
     }
-    public function getName($nim) {
-        $stmt = $this->conn->prepare("SELECT nama FROM nim WHERE nim = ?");
-        $stmt->bind_param("s", $nim);
-        $stmt->execute();
-        $stmt->bind_result($nama);
-        $stmt->fetch();
-        $stmt->close();
-        return $nama;
-    }
+    
+
     
 } 

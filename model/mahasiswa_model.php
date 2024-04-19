@@ -1,58 +1,82 @@
 <?php
-require_once 'connection.php';
+require_once '../core/Database.php'; // Menggunakan nama file yang sesuai
 
 class Mahasiswa_Model {
-    private $conn;
+    private $db;
 
     public function __construct() {
-        $connection = new Connection();
-        $this->conn = $connection->getConnection();
+        $this->db = new Database();
+    }
+    public function login($nim, $password) {
+        // Prepare query
+        $query = "SELECT nim, password FROM user WHERE nim = ?";
+        $this->db->query($query);
+        $this->db->bind(1, $nim);
+
+        // Execute query
+        $result = $this->db->single();
+
+        // Check if user exists
+        if ($result) {
+            // Verify password
+            if ($password === $result['password']) {
+                // Password is correct
+                session_start();
+                $_SESSION["nim"] = $result['nim'];
+                return true;
+            } else {
+                // Incorrect password
+                return false;
+            }
+        } else {
+            // User not found
+            return false;
+        }
     }
 
     public function checkNim($nim) {
-        $stmt = $this->conn->prepare("SELECT nim FROM mahasiswa WHERE nim = ?");
-        $stmt->bind_param("s", $nim);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->num_rows == 1;
+        $this->db->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
+        $this->db->bind(':nim', $nim);
+        $this->db->execute();
+        $result = $this->db->resultSet();
+        return count($result) == 1;
     }
 
     public function registerUser($nim, $password) {
-        $nim = mysqli_real_escape_string($this->conn, $nim);
-        $password = mysqli_real_escape_string($this->conn, $password);
+        $nim = htmlspecialchars(strip_tags($nim));
+        $password = htmlspecialchars(strip_tags($password));
 
-        $checkQuery = "SELECT * FROM mahasiswa WHERE nim='$nim'";
-        $checkAkunLain = "SELECT * FROM user WHERE nim='$nim'";
-        $result = mysqli_query($this->conn, $checkQuery);
-        $resultCheckAkun = mysqli_query($this->conn, $checkAkunLain);
+        $checkQuery = "SELECT * FROM mahasiswa WHERE nim=:nim";
+        $result = $this->db->single();
 
         if (!$result) {
-            return "Error: " . mysqli_error($this->conn);
-        }
-
-        $numRows = mysqli_num_rows($result);
-        $numRowsAkun = mysqli_num_rows($resultCheckAkun);
-        if ($numRows == 0) {
             return "NIM tidak ditemukan dalam database";
         }
-        if ($numRowsAkun > 0) {
-            return "NIM sudah terdaftar";
-        }
 
-        $insertQuery = "INSERT INTO user (nim, password) VALUES ('$nim', '$password')";
-        if (mysqli_query($this->conn, $insertQuery)) {
+        $insertQuery = "INSERT INTO user (nim, password) VALUES (:nim, :password)";
+        $this->db->query($insertQuery);
+        $this->db->bind(':nim', $nim);
+        $this->db->bind(':password', $password);
+
+        if ($this->db->execute()) {
             return "Berhasil registrasi";
         } else {
-            return "Error: " . $insertQuery . "<br>" . mysqli_error($this->conn);
+            return "Error: " . $this->db->rowCount();
         }
-    } 
-        public function validateStudent($nim) {
-        $sql = "SELECT nim FROM nim WHERE nim = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $nim);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->num_rows == 1;
+    }
+
+    public function validateStudent($nim) {
+        $this->db->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
+        $this->db->bind(':nim', $nim);
+        $this->db->execute();
+        $result = $this->db->resultSet();
+        return count($result) == 1;
+    }
+    public function getNama($nim){
+        $this->db->query('SELECT nama FROM nim WHERE nim=:nim');
+        $this->db->bind(':nim', $nim);
+        $result = $this->db->single();
+        return $result['nama_mahasiswa'];
     }
     
 }

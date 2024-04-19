@@ -45,8 +45,12 @@ class Database{
 					$type = PDO::PARAM_STR;
 			}
 		}
+		if (is_array($value)) {
+			$value = implode(',', $value);
+		}
+	
 		$this->stmt->bindValue($param, $value, $type);
-	}
+		}
 
 	public function execute(){
 		$this->stmt->execute();

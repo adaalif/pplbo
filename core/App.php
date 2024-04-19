@@ -2,38 +2,37 @@
 
 class App {
 	protected $controller = 'login';
-	protected $method = 'index';
-	protected $params = [];
+    protected $method = 'index';
+    protected $params = [];
 
-	public function __construct(){
-		$url = $this->parseURL();
-			if ( file_exists('../app/contr/' . $url[0] . '.php')) {
-			$this->controller = $url[0];
-			unset($url[0]);
-		}
+    public function __construct(){
+        $url = $this->parseURL();
+        $controllerPath = '../contr/' . $url[0] . '.php';
 
-		// controller
-		require_once '../app/contr/' . $this->controller . '.php' ;
-		$this->controller = new $this->controller;
-		
-		// method
-		if ( isset($url[1]) ) {
-			if ( method_exists($this->controller, $url[1])){
-				$this->method =  $url[1];
-				unset($url[1]);
-			}
-		}
+        // Check if the controller file exists
+        if (file_exists($controllerPath)) {
+            $this->controller = $url[0];
+            unset($url[0]);
+        }
 
-		// prams
-		if (!empty($url)) {
-			$this->params = array_values( $url );
-		}
+        // Require the controller file
+        require_once $controllerPath;
+        
+        // Instantiate the controller
+        $this->controller = new $this->controller;
 
-		// jalankan controller dan method, serta kirimkan params jika ada
-		call_user_func_array([$this->controller, $this->method], $this->params);
-	
-	}
+        // Check for the method
+        if (isset($url[1]) && method_exists($this->controller, $url[1])) {
+            $this->method = $url[1];
+            unset($url[1]);
+        }
 
+        // Set params
+        $this->params = $url ? array_values($url) : [];
+
+        // Call the controller method with params
+        call_user_func_array([$this->controller, $this->method], $this->params);
+    }	
 	public function parseURL(){
 		if( isset($_GET['url']) ){
 			$url = rtrim( $_GET['url'], '/' );

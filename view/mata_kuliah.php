@@ -1,21 +1,15 @@
 <?php
 // Panggil file controller
-require_once 'contr/matakuliah-contr.php';
+require_once '../contr/matakuliah-contr.php';
 
 // Buat objek dari kelas StudentController
-$controller = new MataKuliahController();
+$controller = new Mahasiswa_Model();
 
 // Periksa sesi login
 $controller->checkLoginSession();
 
-// Validasi mahasiswa
-if (!$controller->validateStudent()) {
-    header("Location: login.php");
-    exit();
-}
-
 // Ambil data kelas
-$kelas = $controller->getClassData();
+$kelas = $controller->getAllKelas();
 ?>
 
 <!DOCTYPE html>

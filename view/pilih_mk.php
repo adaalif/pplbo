@@ -1,9 +1,7 @@
 <?php
-// Panggil file controller
-require_once 'contr/matakuliah-contr.php';
+require_once '../contr/matakuliah-contr.php';
 
-// Buat objek dari kelas StudentController
-$controller = new MataKuliahController();
+$controller = new Mahasiswa_Model();
 
 // Periksa sesi login
 $controller->checkLoginSession();
@@ -11,11 +9,11 @@ $controller->checkLoginSession();
 // Proses pemilihan mata kuliah jika ada kode kelas yang dipilih
 if(isset($_GET['kode_kelas'])) {
     $selected_kelas = $_GET['kode_kelas'];
-    $controller->processPilihMataKuliah($selected_kelas);
+    $controller->pilihMataKuliah($selected_kelas,$nim);
 }
 
 // Ambil data mata kuliah
-$kelas = $controller->getClassData();
+$kelas = $controller->getAllKelas();
 ?>
 
 <!DOCTYPE html>
@@ -24,10 +22,7 @@ $kelas = $controller->getClassData();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pilih Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
     <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
         body {
             font-family: Arial, sans-serif;
         }
@@ -50,7 +45,7 @@ $kelas = $controller->getClassData();
 <body>
 
 <h2>Pilih Mata Kuliah</h2>
-
+<form action="../contr/pilih_contr.php" method="POST">
 <table>
     <thead>
         <tr>
@@ -62,7 +57,6 @@ $kelas = $controller->getClassData();
         </tr>
     </thead>
     <tbody>
-        <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
         <?php foreach ($kelas as $row): ?>
                 <tr>
                     <td><?= $row['kode_kelas'] ?></td>
@@ -75,5 +69,7 @@ $kelas = $controller->getClassData();
         </tbody>
     </table>
     <input type="submit" name="submit" value="Pilih Mata Kuliah">
+    </form>
+
 </body>
 </html>

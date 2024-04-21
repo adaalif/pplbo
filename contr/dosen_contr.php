@@ -23,5 +23,11 @@ class Dosen_controller {
     public function validateDosen($nip) {
         return $this->model->validateDosen($nip);
     }
+    public function getAllKelasbyNIP($nip){
+        return $this->model->getAllKelasbyNIP($nip);
+    }
+    public function checkLoginSession(){
+        return $this -> model->checkLoginSession();
+    }
 }
 ?>

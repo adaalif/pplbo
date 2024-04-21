@@ -75,6 +75,20 @@ class Dosen_Model {
         $result = $this->db->resultSet();
         return count($result) == 1;
     }
-    
+    public function getAllKelasbyNIP($nip){
+        $this->db->query('SELECT waktu, kode_kelas, ruangan, mata_kuliah from kelas
+                          WHERE nip = :nip');
+        $this->db->bind(':nip', $nip);
+        return $this->db->resultSet();
+    }
+    public function checkLoginSession(){
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['nip'])) {
+            header("Location: login.php");
+            exit();
+        }
+    }
 }
 ?>

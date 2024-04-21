@@ -20,6 +20,13 @@ class Mahasiswa_Model {
         $this->db->bind(':nim', $nim);
         return $this->db->resultSet();
     }
+    public function getAllKelasbyNIP($nip){
+        $this->db->query('SELECT k.*, d.* FROM kelas d
+                          JOIN kelas k ON d.kode_kelas = k.kode_kelas
+                          WHERE d.nip = :nip');
+        $this->db->bind(':nip', $nip);
+        return $this->db->resultSet();
+    }
     
     
 

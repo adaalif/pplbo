@@ -3,7 +3,7 @@ session_start(); // Mulai sesi
 
 require '../contr/matakuliah-contr.php';
 
-$controller = new MataKuliahController();
+$controller = new Matakuliah_controller();
 
 // Periksa apakah nim telah diset dalam sesi
 if (!isset($_SESSION['nim'])) {

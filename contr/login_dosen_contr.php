@@ -15,12 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Proses hasil login
     if ($login_result === true) {
         echo "<script>alert('Login berhasil');</script>"; 
-        header("Location: ../view/dosen/dashboard_dosen.php"); // Redirect to the dashboard for Dosen
+        header("Location: ../view/dashboard_dosen.php"); // Redirect to the dashboard for Dosen
         exit();
     } else {
         // Tampilkan pesan kesalahan jika login gagal
         echo "<script>alert('Incorrect NIP or password');</script>"; 
-        echo "<script>window.location.href = '../view/login/login_dosen.php';</script>"; 
+        echo "<script>window.location.href = '../view/login_dosen.php';</script>"; 
     }
 }
 ?>

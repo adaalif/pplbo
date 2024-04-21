@@ -90,5 +90,23 @@ class Dosen_Model {
             exit();
         }
     }
+    public function insertNilai($nim, $kode_kelas, $nilai){
+        $this->db->query('INSERT INTO nilai (nilai) VALUES (nilai) where nim = :nim and kode_kelas = :kode_kelas');
+        $this->db->bind(':nim', $nim);
+        $this->db->bind(':kode_kelas', $kode_kelas);
+        $this->db->bind(':nilai', $nilai);
+
+        if($this->db->execute()){
+            return true; 
+        } else {
+            return false; 
+        }
+    }
+    public function getAllStudentsByKodeKelas($kode_kelas) {
+        $this->db->query('SELECT * FROM data_kelas_mahasiswa WHERE kode_kelas = :kode_kelas');
+        $this->db->bind(':kode_kelas', $kode_kelas);
+        return $this->db->resultSet();
+    }
+    
 }
 ?>

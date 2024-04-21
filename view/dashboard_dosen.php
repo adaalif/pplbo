@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add event listener for logout button
   logoutBtn.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = '../login/login_dosen.php';
+    window.location.href = 'login_dosen.php';
   });
   mata_kuliah.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = '../jadwal_mk.php';
+    window.location.href = 'jadwal_mk.php';
   });
   // Add event listener for settings dropdown
   settingsDropdown.addEventListener('change', function() {

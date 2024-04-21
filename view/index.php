@@ -1,3 +1,6 @@
+<?php
+require_once '../init.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +21,7 @@
         <h2>Password</h2>
         <input type="password" name="password" placeholder="Password" required>
         <input type="submit" value="Login">
-        <a href="<?= BASEURL; ?>/view/register.html" class = "Register">Register</a>
-        <a href="login/login_dosen" class = "dosen">dosen</a>
-
-        
+        <a href="login_dosen.php" class = "dosen">dosen</a>
     </form>
 </div>
 </body>

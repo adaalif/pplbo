@@ -29,5 +29,11 @@ class Dosen_controller {
     public function checkLoginSession(){
         return $this -> model->checkLoginSession();
     }
+    public function getAllStudentsByKodeKelas($kode_kelas) {
+        return $this->model->getAllStudentsByKodeKelas($kode_kelas);
+    }
+    public function insertNilai($nim, $kode_kelas, $nilai) {
+        return $this->model->insertNilai($nim, $kode_kelas, $nilai);
+    }
 }
 ?>

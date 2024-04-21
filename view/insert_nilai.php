@@ -11,17 +11,13 @@ $nip = $_SESSION['nip'];
 // Ambil data kelas
 $kelas = $controller->getAllKelasbyNIP($nip);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
+    <title>Insert Nilai</title>
     <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
         body {
             font-family: Arial, sans-serif;
         }
@@ -43,7 +39,7 @@ $kelas = $controller->getAllKelasbyNIP($nip);
 </head>
 <body>
 
-<h2>Daftar Mata Kuliah</h2>
+<h2>Insert Nilai</h2>
 
 <table>
     <thead>
@@ -51,23 +47,26 @@ $kelas = $controller->getAllKelasbyNIP($nip);
             <th>Kode Kelas</th>
             <th>Mata Kuliah</th>
             <th>Waktu</th>
+            <th>Action</th> <!-- New column for action -->
         </tr>
     </thead>
     <tbody>
-        <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
-        <?php
-        // Ambil data dari PHP dan tampilkan di sini
-        foreach ($kelas as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['kode_kelas'] . "</td>";
-            echo "<td>" . $row['mata_kuliah'] . "</td>";
-            echo "<td>" . $row['waktu'] . "</td>";
-            echo "</tr>";
-        }
-        ?>
+        <?php foreach ($kelas as $row): ?>
+            <tr>
+                <td><?= $row['kode_kelas'] ?></td>
+                <td><?= $row['mata_kuliah'] ?></td>
+                <td><?= $row['waktu'] ?></td>
+                <td>
+                    <!-- Button to view students -->
+                    <form action="menilai_mahasiswa.php" method="GET">
+                        <input type="hidden" name="kode_kelas" value="<?= $row['kode_kelas'] ?>">
+                        <button href = "" type="submit">View Students </button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
     </tbody>
 </table>
-<a href="dashboard_dosen.php"> return</a>
-<a href="insert_nilai.php"> isi nilai mata kuliah</a>
+
 </body>
 </html>

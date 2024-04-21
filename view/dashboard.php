@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add event listener for logout button
   logoutBtn.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = 'login/index.php';
+    window.location.href = 'index.php';
   });
   mata_kuliah.addEventListener('click', function() {
     // Redirect user to login page

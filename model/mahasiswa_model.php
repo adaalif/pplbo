@@ -98,7 +98,7 @@ class Mahasiswa_Model extends Database {
         $this->bind(':alamat', $alamat);
 
         // Eksekusi query
-        return $this->execute();
+        return $this->rowCount();
     }
 }
 ?>

@@ -44,17 +44,11 @@ class Mahasiswa_controller extends Controller {
     public function edit (){
         $this->view('edit');
     }
-    public function updateMahasiswa() {
+    public function updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat) {
         // Periksa apakah data telah dikirim melalui metode POST
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $model = new Mahasiswa_model();
-            $model->checkLoginSession();
-            $nim = $_SESSION['nim'];
-            $tempat_lahir = $_POST['tempat_lahir'];
-            $tanggal_lahir = $_POST['tanggal_lahir'];
-            $alamat = $_POST['alamat'];
-    
-            // Panggil fungsi updateMahasiswa dari model untuk menyimpan perubahan data
+        $model = new Mahasiswa_model();
+
+            // Panggil fun updateMahasiswa dari model untuk menyimpan perubahan data
             if ($model->updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat)) {
                 // Kirim respons ke klien jika penyimpanan berhasil
                 http_response_code(200);
@@ -66,6 +60,4 @@ class Mahasiswa_controller extends Controller {
             }
         }
     }
-    
-}
 ?>

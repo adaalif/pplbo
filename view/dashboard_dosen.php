@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h1>Welcome to Your Dashboard</h1>
+    <h1>Welcome Dosen</h1>
     <button id="logoutBtn">Logout</button>
     <button id="mata_kuliah">Mata kuliah</button>
     <select id="settingsDropdown">
@@ -67,11 +67,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add event listener for logout button
   logoutBtn.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = 'index.html';
+    window.location.href = 'login_dosen.php';
   });
   mata_kuliah.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = 'mata_kuliah.php';
+    window.location.href = 'jadwal_mk.php';
   });
   // Add event listener for settings dropdown
   settingsDropdown.addEventListener('change', function() {

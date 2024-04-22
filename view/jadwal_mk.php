@@ -1,16 +1,15 @@
 <?php
 // Panggil file controller
-require_once '../contr/matakuliah-contr.php';
+require_once '../contr/dosen_contr.php';
 
 // Buat objek dari kelas StudentController
-$controller = new Mahasiswa_Model();
+$controller = new Dosen_controller();
 
-// Periksa sesi login
 $controller->checkLoginSession();
-$nim = $_SESSION['nim'];
+$nip = $_SESSION['nip'];
 
 // Ambil data kelas
-$kelas = $controller->getAllKelasbyNIM($nim);
+$kelas = $controller->getAllKelasbyNIP($nip);
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +50,6 @@ $kelas = $controller->getAllKelasbyNIM($nim);
         <tr>
             <th>Kode Kelas</th>
             <th>Mata Kuliah</th>
-            <th>Dosen Pengampu</th>
             <th>Waktu</th>
         </tr>
     </thead>
@@ -63,15 +61,13 @@ $kelas = $controller->getAllKelasbyNIM($nim);
             echo "<tr>";
             echo "<td>" . $row['kode_kelas'] . "</td>";
             echo "<td>" . $row['mata_kuliah'] . "</td>";
-            echo "<td>" . $row['dosen'] . "</td>";
             echo "<td>" . $row['waktu'] . "</td>";
             echo "</tr>";
         }
         ?>
-        
     </tbody>
 </table>
-<a href="dashboard.php"> return</a>
-<a href="pilih_mk.php"> pilih mata kuliah</a>
+<a href="dashboard_dosen.php"> return</a>
+<a href="insert_nilai.php"> isi nilai mata kuliah</a>
 </body>
 </html>

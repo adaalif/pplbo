@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
+<title>Login Dosen Page</title>
 
 </head>
 <body>
 <h1 class = "header">
-  Welcome
+  Welcome Dosen
 </h1>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="../contr/login_contr.php" method="post">
-      <h1>NIM</h1>
-        <input type="text" name="nim" placeholder="" required>
+    <form action="../contr/login_dosen_contr.php" method="post">
+      <h1>NIP</h1>
+        <input type="text" name="nip" placeholder="" required>
         <h2>Password</h2>
         <input type="password" name="password" placeholder="Password" required>
         <input type="submit" value="Login">
-        <a href="../register.html" class = "Register">Register</a>
-        <a href="../Forgot_password.html" class = "Forgot_Password"> Forgot Pasword</a>
         
     </form>
 </div>

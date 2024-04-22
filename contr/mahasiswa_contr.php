@@ -1,5 +1,5 @@
 <?php 
-require_once 'Mahasiswa_model.php';
+require_once '../model/mahasiswa_model.php';
 
 class Mahasiswa_controller {
     private $model;
@@ -20,7 +20,9 @@ class Mahasiswa_controller {
     public function validateStudent($nim) {
         return $this->model->validateStudent($nim);
     }
-
+    public function login($nim,$password){
+        return $this->model->login($nim, $password);
+    }
     // Tambahkan fungsi lain sesuai kebutuhan
 }
 ?>

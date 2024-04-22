@@ -11,6 +11,9 @@ class Matakuliah_controller {
     public function getAllKelas() {
         return $this->model->getAllKelas();
     }
+    public function getAllKelasbyNIM($nim) {
+        return $this->model->getAllKelasbyNIM($nim);
+    }
 
     public function getKelasByKodeKelas($kode_kelas) {
         return $this->model->getKelasByKodeKelas($kode_kelas);

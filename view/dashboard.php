@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   mata_kuliah.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = 'mata_kuliah.php';
+    window.location.href = '../Matakuliah_controller/index';
   });
   // Add event listener for settings dropdown
   settingsDropdown.addEventListener('change', function() {

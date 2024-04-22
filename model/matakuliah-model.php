@@ -1,47 +1,40 @@
 <?php
-    require '../core/database.php';
-
-class Mahasiswa_Model {
+class Mahasiswa_Model extends Database {
     private $table = 'kelas';
-    private $db;
-
-    public function __construct(){
-        $this->db = new Database;
-    }
 
     public function getAllKelas(){
-        $this->db->query('SELECT * FROM '. $this->table );
-        return $this->db->resultSet();
+        $this->query('SELECT * FROM '. $this->table );
+        return $this->resultSet();
     }
     public function getAllKelasbyNIM($nim){
-        $this->db->query('SELECT k.*, d.* FROM data_kelas_mahasiswa d
+        $this->query('SELECT k.*, d.* FROM data_kelas_mahasiswa d
                           JOIN kelas k ON d.kode_kelas = k.kode_kelas
                           WHERE d.nim = :nim');
-        $this->db->bind(':nim', $nim);
-        return $this->db->resultSet();
+        $this->bind(':nim', $nim);
+        return $this->resultSet();
     }
     public function getAllKelasbyNIP($nip){
-        $this->db->query('SELECT k.*, d.* FROM kelas d
+        $this->query('SELECT k.*, d.* FROM kelas d
                           JOIN kelas k ON d.kode_kelas = k.kode_kelas
                           WHERE d.nip = :nip');
-        $this->db->bind(':nip', $nip);
-        return $this->db->resultSet();
+        $this->bind(':nip', $nip);
+        return $this->resultSet();
     }
     
     
 
     public function getKelasByKodeKelas($kode_kelas){
-        $this->db->query('SELECT * FROM '. $this->table .' WHERE kode_kelas=:kode_kelas');
-        $this->db->bind(':kode_kelas', $kode_kelas);
-        return $this->db->single();
+        $this->query('SELECT * FROM '. $this->table .' WHERE kode_kelas=:kode_kelas');
+        $this->bind(':kode_kelas', $kode_kelas);
+        return $this->single();
     }
     public function pilihMataKuliah($kode_kelas, $nim){
-        $this->db->query('INSERT INTO data_kelas_mahasiswa (kode_kelas, nim) VALUES (:kode_kelas, :nim)');
-        $this->db->bind(':kode_kelas', $kode_kelas);
-        $this->db->bind(':nim', $nim);
+        $this->query('INSERT INTO data_kelas_mahasiswa (kode_kelas, nim) VALUES (:kode_kelas, :nim)');
+        $this->bind(':kode_kelas', $kode_kelas);
+        $this->bind(':nim', $nim);
 
         // Execute
-        if($this->db->execute()){
+        if($this->execute()){
             return true;
         } else {
             return false;
@@ -57,17 +50,30 @@ class Mahasiswa_Model {
         }
     }
     public function cekPilihanMataKuliah($kode_kelas, $nim){
-        $this->db->query('SELECT * FROM data_kelas_mahasiswa WHERE kode_kelas = :kode_kelas AND nim = :nim');
-        $this->db->bind(':kode_kelas', $kode_kelas);
-        $this->db->bind(':nim', $nim);
-        $this->db->execute();
+        $this->query('SELECT * FROM data_kelas_mahasiswa WHERE kode_kelas = :kode_kelas AND nim = :nim');
+        $this->bind(':kode_kelas', $kode_kelas);
+        $this->bind(':nim', $nim);
+        $this->execute();
         
-        if($this->db->rowCount() > 0){
+        if($this->rowCount() > 0){
             return true;
         } else {
             return false;
         }
     }
+    public function hapusMataKuliah($kode_kelas, $nim){
+        $this->query('DELETE FROM data_kelas_mahasiswa WHERE kode_kelas=:kode_kelas and nim = :nim');
+        $this->bind(':kode_kelas', $kode_kelas);
+        $this->bind(':nim', $nim);
+    
+        // Execute
+        if($this->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     
 
 }

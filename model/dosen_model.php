@@ -103,7 +103,7 @@ class Dosen_Model {
         }
     }
     public function getAllStudentsByKodeKelas($kode_kelas) {
-        $this->db->query('SELECT * FROM data_kelas_mahasiswa WHERE kode_kelas = :kode_kelas');
+        $this->db->query('SELECT k*, nama b FROM data_kelas_mahasiswa k join nim b ON b.nim = k.nim  WHERE kode_kelas = :kode_kelas');
         $this->db->bind(':kode_kelas', $kode_kelas);
         return $this->db->resultSet();
     }

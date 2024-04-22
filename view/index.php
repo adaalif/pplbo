@@ -15,7 +15,7 @@ require_once '../init.php';
 </h1>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="../contr/login_contr.php" method="post">
+    <form action="login/login_contr" method="post">
       <h1>NIM</h1>
         <input type="text" name="nim" placeholder="" required>
         <h2>Password</h2>

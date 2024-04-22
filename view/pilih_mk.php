@@ -1,5 +1,5 @@
 <?php
-require_once '../contr/matakuliah-contr.php';
+require_once '../contr/Matakuliah_controller.php';
 
 $controller = new Mahasiswa_Model();
 
@@ -45,7 +45,7 @@ $kelas = $controller->getAllKelas();
 <body>
 
 <h2>Pilih Mata Kuliah</h2>
-<form action="../contr/pilih_contr.php" method="POST">
+<form action="../Matakuliah_controller/pilih_mk_contr" method="POST">
 <table>
     <thead>
         <tr>

@@ -1,6 +1,6 @@
 <?php
 // Panggil file controller
-require_once '../contr/matakuliah-contr.php';
+require_once '../contr/Matakuliah_controller.php';
 
 // Buat objek dari kelas StudentController
 $controller = new Mahasiswa_Model();
@@ -56,22 +56,28 @@ $kelas = $controller->getAllKelasbyNIM($nim);
         </tr>
     </thead>
     <tbody>
-        <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
-        <?php
-        // Ambil data dari PHP dan tampilkan di sini
-        foreach ($kelas as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['kode_kelas'] . "</td>";
-            echo "<td>" . $row['mata_kuliah'] . "</td>";
-            echo "<td>" . $row['dosen'] . "</td>";
-            echo "<td>" . $row['waktu'] . "</td>";
-            echo "</tr>";
-        }
-        ?>
-        
+    <form action="../Matakuliah_controller/hapus_mk" method="POST">
+    <?php if (!empty($kelas)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
+        <?php foreach ($kelas as $row): ?>
+            <tr>
+                <td><input type="checkbox" name="kode_kelas[]" value="<?= $row['kode_kelas'] ?>"></td> 
+                <td><?= $row['kode_kelas'] ?></td>
+                <td><?= $row['mata_kuliah'] ?></td>
+                <td><?= $row['dosen'] ?></td>
+                <td><?= $row['waktu'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+        <input type="submit" name="submit" value="Hapus Terpilih">
+    <?php else: ?>
+        <p>Tidak ada mata kuliah yang tersedia.</p>
+    <?php endif; ?>
+</form>
+
+
     </tbody>
+    
 </table>
 <a href="dashboard.php"> return</a>
-<a href="pilih_mk.php"> pilih mata kuliah</a>
+<a href="pilih_mk"> pilih mata kuliah</a>
 </body>
 </html>

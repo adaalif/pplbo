@@ -1,7 +1,7 @@
 <?php
 require_once '../contr/Matakuliah_controller.php';
 
-$controller = new Mahasiswa_Model();
+$controller = new Matakuliah_model();
 
 // Periksa sesi login
 $controller->checkLoginSession();

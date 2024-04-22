@@ -72,6 +72,33 @@ class Mahasiswa_Model extends Database {
         $result = $this->single();
         return $result['nama_mahasiswa'];
     }
+    public function getAllMahasiswa($nim) {
+        $this->query('SELECT * FROM data_mahasiswa WHERE nim = :nim');
+        $this->bind(':nim', $nim); // Binding nilai parameter nim
+        return $this->resultSet();
+    }
     
+    public function checkLoginSession(){
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (!isset($_SESSION['nim'])) {
+            header("Location: login.php");
+            exit();
+        }
+    }
+    public function updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat) {
+        // Query SQL untuk melakukan update data
+        $this->query('UPDATE data_mahasiswa SET tempat_lahir = :tempat_lahir, tanggal_lahir = :tanggal_lahir, alamat = :alamat WHERE nim = :nim');
+
+        // Binding parameter
+        $this->bind(':nim', $nim);
+        $this->bind(':tempat_lahir', $tempat_lahir);
+        $this->bind(':tanggal_lahir', $tanggal_lahir);
+        $this->bind(':alamat', $alamat);
+
+        // Eksekusi query
+        return $this->execute();
+    }
 }
 ?>

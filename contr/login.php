@@ -5,7 +5,7 @@ class Login extends Controller{
 		$this->view('index');
 	}
     public function login_contr(){
-		require_once 'mahasiswa_contr.php';
+		require_once 'Mahasiswa_controller.php';
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Ambil data dari form

@@ -5,7 +5,7 @@ class Matakuliah_controller extends Controller{
     private $model;
 
     public function __construct() {
-        $this->model = new Mahasiswa_Model();
+        $this->model = new Matakuliah_model();
     }
     public function index() {
         $this->view('mata_kuliah');
@@ -15,7 +15,7 @@ class Matakuliah_controller extends Controller{
     }
     public function pilih_mk_contr(){
         require_once '../model/matakuliah-model.php';
-    $controller = new Mahasiswa_Model(); // Sesuaikan dengan nama controller Anda
+    $controller = new Matakuliah_model(); // Sesuaikan dengan nama controller Anda
 
     $controller->checkLoginSession();
 
@@ -41,11 +41,11 @@ class Matakuliah_controller extends Controller{
     }
     }
     public function hapus_mk(){
-            $controller = new Mahasiswa_Model();
+            $controller = new Matakuliah_model();
         $controller->checkLoginSession();
             
             // Buat objek model
-            $model = new Mahasiswa_Model();
+            $model = new Matakuliah_model();
             if(isset($_POST['submit']) && isset($_POST['kode_kelas']) && !empty($_POST['kode_kelas'])){
                 $kode_kelas_terpilih = $_POST['kode_kelas'];
                 $nim = $_SESSION['nim'];

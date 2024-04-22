@@ -49,35 +49,25 @@ $kelas = $controller->getAllKelasbyNIM($nim);
 <table>
     <thead>
         <tr>
-            <th>Kode Kelas</th>
             <th>Mata Kuliah</th>
-            <th>Dosen Pengampu</th>
-            <th>Waktu</th>
+            <th>nilai</th>
+
         </tr>
     </thead>
     <tbody>
-    <form action="../Matakuliah_controller/hapus_mk" method="POST">
     <?php if (!empty($kelas)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
         <?php foreach ($kelas as $row): ?>
             <tr>
-                <td><input type="checkbox" name="kode_kelas[]" value="<?= $row['kode_kelas'] ?>"></td> 
-                <td><?= $row['kode_kelas'] ?></td>
                 <td><?= $row['mata_kuliah'] ?></td>
-                <td><?= $row['dosen'] ?></td>
-                <td><?= $row['waktu'] ?></td>
+                <td><?= $row['nilai'] ?></td>
             </tr>
         <?php endforeach; ?>
-        <input type="submit" name="submit" value="Hapus Terpilih">
     <?php else: ?>
         <p>Tidak ada mata kuliah yang tersedia.</p>
     <?php endif; ?>
-</form>
-
-
     </tbody>
     
 </table>
 <a href="../login/dashboard"> return</a>
-<a href="pilih_mk"> pilih mata kuliah</a>
 </body>
 </html>

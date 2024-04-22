@@ -1,5 +1,5 @@
 <?php
-class Mahasiswa_Model extends Database {
+class Matakuliah_model extends Database {
     private $table = 'kelas';
 
     public function getAllKelas(){

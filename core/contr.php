@@ -7,11 +7,6 @@ class Controller {
 		require_once '../model/' . $model . '.php';
 		return new $model;
 	}
-	public function contr($controller){
-		require_once '../contr/' . $controller . '.php';
-		return new $controller;
-	}
-
     
 }
 

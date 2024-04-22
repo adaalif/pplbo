@@ -1,20 +1,14 @@
 <?php
-require_once '../core/Database.php'; // Menggunakan nama file yang sesuai
 
-class Mahasiswa_Model {
-    private $db;
-
-    public function __construct() {
-        $this->db = new Database();
-    }
+class Mahasiswa_Model extends Database {
     public function login($nim, $password) {
         // Prepare query
         $query = "SELECT nim, password FROM user WHERE nim = ?";
-        $this->db->query($query);
-        $this->db->bind(1, $nim);
+        $this->query($query);
+        $this->bind(1, $nim);
 
         // Execute query
-        $result = $this->db->single();
+        $result = $this->single();
 
         // Check if user exists
         if ($result) {
@@ -35,10 +29,10 @@ class Mahasiswa_Model {
     }
 
     public function checkNim($nim) {
-        $this->db->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
-        $this->db->bind(':nim', $nim);
-        $this->db->execute();
-        $result = $this->db->resultSet();
+        $this->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
+        $this->bind(':nim', $nim);
+        $this->execute();
+        $result = $this->resultSet();
         return count($result) == 1;
     }
 
@@ -47,35 +41,35 @@ class Mahasiswa_Model {
         $password = htmlspecialchars(strip_tags($password));
 
         $checkQuery = "SELECT * FROM mahasiswa WHERE nim=:nim";
-        $result = $this->db->single();
+        $result = $this->single();
 
         if (!$result) {
             return "NIM tidak ditemukan dalam database";
         }
 
         $insertQuery = "INSERT INTO user (nim, password) VALUES (:nim, :password)";
-        $this->db->query($insertQuery);
-        $this->db->bind(':nim', $nim);
-        $this->db->bind(':password', $password);
+        $this->query($insertQuery);
+        $this->bind(':nim', $nim);
+        $this->bind(':password', $password);
 
-        if ($this->db->execute()) {
+        if ($this->execute()) {
             return "Berhasil registrasi";
         } else {
-            return "Error: " . $this->db->rowCount();
+            return "Error: " . $this->rowCount();
         }
     }
 
     public function validateStudent($nim) {
-        $this->db->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
-        $this->db->bind(':nim', $nim);
-        $this->db->execute();
-        $result = $this->db->resultSet();
+        $this->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
+        $this->bind(':nim', $nim);
+        $this->execute();
+        $result = $this->resultSet();
         return count($result) == 1;
     }
     public function getNama($nim){
-        $this->db->query('SELECT nama FROM nim WHERE nim=:nim');
-        $this->db->bind(':nim', $nim);
-        $result = $this->db->single();
+        $this->query('SELECT nama FROM nim WHERE nim=:nim');
+        $this->bind(':nim', $nim);
+        $result = $this->single();
         return $result['nama_mahasiswa'];
     }
     

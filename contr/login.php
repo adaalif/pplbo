@@ -6,11 +6,12 @@ class Login extends Controller{
 	}
     public function login_contr(){
 		require_once 'Mahasiswa_controller.php';
+		require_once '../model/connection.php';
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			// Ambil data dari form
-			$nim = $_POST["nim"];
-			$password = $_POST["password"];
+			$nim = mysqli_real_escape_string($conn,$_POST["nim"]);
+			$password = mysqli_real_escape_string($conn,$_POST["password"]);
 		
 			// Buat objek model
 			$controller = new Mahasiswa_controller();

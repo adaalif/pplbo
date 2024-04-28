@@ -1,10 +1,11 @@
 <?php
 require_once 'dosen_contr.php'; // Adjust the file path accordingly
+require_once '../model/connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari form
-    $nip = $_POST["nip"];
-    $password = $_POST["password"];
+    $nip = mysqli_real_escape_string($conn,$_POST["nip"]);
+    $password = mysqli_real_escape_string($conn,$_POST["password"]);
 
     // Buat objek controller
     $controller = new Dosen_controller();

@@ -90,15 +90,20 @@ class Mahasiswa_Model extends Database {
     public function updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat) {
         // Query SQL untuk melakukan update data
         $this->query('UPDATE data_mahasiswa SET tempat_lahir = :tempat_lahir, tanggal_lahir = :tanggal_lahir, alamat = :alamat WHERE nim = :nim');
-
+    
         // Binding parameter
         $this->bind(':nim', $nim);
         $this->bind(':tempat_lahir', $tempat_lahir);
         $this->bind(':tanggal_lahir', $tanggal_lahir);
         $this->bind(':alamat', $alamat);
-
+    
         // Eksekusi query
-        return $this->rowCount();
+        if ($this->execute()) {
+            return true; // Return true if the query executed successfully
+        } else {
+            return false; // Return false if there was an error
+        }
     }
+    
 }
 ?>

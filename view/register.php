@@ -14,7 +14,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="register_process.php">
+        <form action="../login/register_contr" method = "POST">
                 <h1>Sistem Informasi Administrasi Kemahasiswaan</h1><br>
                 <h3>Buat Akun</h3>
                 <div class="infield">

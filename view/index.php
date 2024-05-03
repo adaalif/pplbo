@@ -1,5 +1,5 @@
 <?php
-require_once '../init.php';
+require '../init.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,10 @@ require_once '../init.php';
                     <label></label>
                 </div>
                 <button>Masuk</button>
+
             </form>
+            <a href="login/register"> register</a>
+
         </div>
 
 </body>

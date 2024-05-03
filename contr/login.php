@@ -1,15 +1,20 @@
 <?php 
+$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 
 class Login extends Controller{
 	public function index(){
 		$this->view('index');
+	}
+	
+	public function register(){
+		$this->view('register');
 	}
     public function login_contr(){
 		require_once 'Mahasiswa_controller.php';
 		require_once '../model/connection.php';
 
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			// Ambil data dari form
+			$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 			$nim = mysqli_real_escape_string($conn,$_POST["nim"]);
 			$password = mysqli_real_escape_string($conn,$_POST["password"]);
 		
@@ -25,14 +30,52 @@ class Login extends Controller{
 				$this->view('dashboard');
 				exit();
 			} else {
-				// Tampilkan pesan kesalahan jika login gagal
 				echo "<script>alert('Incorrect nim or password');</script>"; 
-				$this->view('index');
+				echo '<meta http-equiv="refresh" content="2;url=' . htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') . '">';
+				exit();
 			}
+			
 		}
 		
-		
+	
     }
+
+	public function register_contr(){
+		require_once 'Mahasiswa_controller.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nim = $_POST['nim'];
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+	if ($password != $confirm_password) {
+		echo "password tidak sama";
+		$this-> view("index");
+	}
+	else{
+		$model = new Mahasiswa_Model();
+		$result = $model->registerUser($nim, $password);
+		if($result){
+			echo "<script>alert(' berhasil');</script>"; 
+			$base_url = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+
+			echo '<meta http-equiv="refresh" content="2;url=' . htmlspecialchars($base_url, ENT_QUOTES, 'UTF-8') . '">';
+			exit();
+
+		}
+		
+		else{
+			echo "<script>alert(' gagal');</script>"; 
+			$this->view('register');
+		
+	}
+}
+
+} else {
+	$this->view('index');
+
+    exit;
+}
+	}
     public function login_dosen(){
 
 	}

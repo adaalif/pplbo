@@ -7,7 +7,9 @@ class Controller {
 		require_once '../model/' . $model . '.php';
 		return new $model;
 	}
-    
+	public function logs(){
+		return '..Public/index';
+	}    
 }
 
 ?>

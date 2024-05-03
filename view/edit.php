@@ -39,28 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
-    <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
-        body {
-            font-family: Arial, sans-serif;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
@@ -111,24 +89,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <div class="main-body">
           <table class="table">
           <h2>Edit Data Mahasiswa</h2>
-
-<form method="POST">
+          <?php foreach ($mahasiswa as $row): ?>
+<form method="POST" action="../Mahasiswa_controller/updateMahasiswa">
+    <input type="hidden" name="nim" value="<?= $row['nim'] ?>"> <!-- Add hidden input for nim -->
     <label for="alamat">Alamat:</label><br>
-    <input type="text" id="alamat" name="alamat" value="<?= $mahasiswa['alamat'] ?>"><br>
+    <input type="text" id="alamat" name="alamat" value="<?= $row['alamat'] ?>"><br>
     
     <label for="tempat_lahir">Tempat Lahir:</label><br>
-    <input type="text" id="tempat_lahir" name="tempat_lahir" value="<?= $mahasiswa['tempat_lahir'] ?>"><br>
+    <input type="text" id="tempat_lahir" name="tempat_lahir" value="<?= $row['tempat_lahir'] ?>"><br>
     
     <label for="tanggal_lahir">Tanggal Lahir:</label><br>
-    <input type="datetime-local" id="tanggal_lahir" name="tanggal_lahir" value="<?= date('Y-m-d\TH:i', strtotime($mahasiswa['tanggal_lahir'])) ?>"><br><br>
+    <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="<?= $row['tanggal_lahir'] ?>"><br><br>
     
     <button type="submit">Update</button>
 </form>
+<?php endforeach; ?>
 
-<a href="index.php">Kembali</a></button>
+
+
+
+<a href="index">Kembali</a></button>
 
 </body>
 </html>
+
+
+
+
+
 
 <style>
      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
@@ -152,7 +140,20 @@ body{
  
 
 }
-
+table {
+            width: 100%;
+            border-collapse: c  ollapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
 .h2 {
     justify-content: center;
     align-items: center;

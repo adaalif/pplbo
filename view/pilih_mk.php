@@ -120,7 +120,7 @@ $kelas = $controller->getAllKelas();
     </table>
     <input type="submit" name="submit" value="Pilih Mata Kuliah">
     </form>
-    <a href="mata_kuliah.php"> return</a>
+    <a href="mata_kuliah"> return</a>
 </body>
 </html>
 

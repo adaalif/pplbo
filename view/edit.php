@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-<a href="index">Kembali</a></button>
+<a href="../Mahasiswa_controller/data">Kembali</a></button>
 
 </body>
 </html>

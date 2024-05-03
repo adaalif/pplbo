@@ -61,10 +61,10 @@ class Mahasiswa_controller extends Controller {
             
             if ($result) {
                 http_response_code(200);
-                echo "Perubahan berhasil disimpan ke database!";
+                $this-> view('data');
             } else {
                 http_response_code(500);
-                echo "Gagal menyimpan perubahan data mahasiswa.";
+                $this-> view('data');
             }
         } else {
             // Kirim respons ke klien jika terjadi kesalahan

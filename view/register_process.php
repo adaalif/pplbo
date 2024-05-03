@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once 'contr/contr.php';
+require_once '../core/contr.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nim = $_POST['nim'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    $nim = mysqli_real_escape_string($conn, $_POST['nim']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $confirm_password = mysqli_real_escape_string($conn,$_POST['confirm_password']);
 
     $controller = new RegisterController();
     $result = $controller->registerUser($nim, $password, $confirm_password);

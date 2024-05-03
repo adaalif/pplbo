@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2024 at 03:17 PM
+-- Generation Time: Apr 23, 2024 at 01:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,15 +29,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `data_kelas_mahasiswa` (
   `nim` varchar(20) NOT NULL,
-  `kode_kelas` varchar(20) NOT NULL
+  `kode_kelas` varchar(20) NOT NULL,
+  `nilai` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `data_kelas_mahasiswa`
 --
 
-INSERT INTO `data_kelas_mahasiswa` (`nim`, `kode_kelas`) VALUES
-('1', '1');
+INSERT INTO `data_kelas_mahasiswa` (`nim`, `kode_kelas`, `nilai`) VALUES
+('1', '2', '');
 
 -- --------------------------------------------------------
 
@@ -48,11 +49,17 @@ INSERT INTO `data_kelas_mahasiswa` (`nim`, `kode_kelas`) VALUES
 CREATE TABLE `data_mahasiswa` (
   `nim` varchar(11) NOT NULL,
   `nama` varchar(20) NOT NULL,
-  `email` varchar(20) NOT NULL,
-  `tempat _lahir` varchar(20) NOT NULL,
-  `tanggal _lahir` date NOT NULL,
+  `tempat_lahir` varchar(20) NOT NULL,
+  `tanggal_lahir` date NOT NULL,
   `alamat` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `data_mahasiswa`
+--
+
+INSERT INTO `data_mahasiswa` (`nim`, `nama`, `tempat_lahir`, `tanggal_lahir`, `alamat`) VALUES
+('1', 'alif', '', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -127,7 +134,7 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`nama`, `nim`, `kode_kelas`, `nilai`) VALUES
-('alif', '1', '1', '');
+('alif', '1', '1', 'A');
 
 -- --------------------------------------------------------
 
@@ -194,6 +201,12 @@ INSERT INTO `user_dosen` (`nip`, `password`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `data_mahasiswa`
+--
+ALTER TABLE `data_mahasiswa`
+  ADD PRIMARY KEY (`nim`);
 
 --
 -- Indexes for table `dosen`

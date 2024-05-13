@@ -73,6 +73,18 @@ class Matakuliah_model extends Database {
             return false;
         }
     }
+    // Di dalam Matakuliah_model
+
+    public function getUniqueTipes() {
+        $this->query("SELECT DISTINCT tipe FROM kelas");
+        return $this->resultSet();
+}
+public function getKelasByTipe($tipe) {
+    $this->query("SELECT * FROM kelas WHERE tipe = :tipe");
+    $this->bind(':tipe', $tipe);
+    return $this->resultSet();
+}
+
     
     
 

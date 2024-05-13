@@ -103,8 +103,7 @@ $mahasiswa = $controller->getAllMahasiswa($nim);
             <th>Tempat Lahir</th>
             <th>Tanggal Lahir</th>
             <th>Alamat</th>
-            <th>Edit</th> <!-- Tambahkan kolom untuk tombol edit -->
-        </tr>
+          </tr>
     </thead>
     <tbody>
     <?php if (!empty($mahasiswa)): ?> <!-- Cek apakah ada data mahasiswa yang ditampilkan -->

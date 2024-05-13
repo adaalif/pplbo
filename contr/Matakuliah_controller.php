@@ -72,6 +72,9 @@ class Matakuliah_controller extends Controller{
     public function getKelasByKodeKelas($kode_kelas) {
         return $this->model->getKelasByKodeKelas($kode_kelas);
     }
+    public function getUniqueTipes(){
+        return $this->model->getUniqueTipes();
+    }
 
 }
 ?>

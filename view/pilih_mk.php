@@ -7,13 +7,13 @@ $controller = new Matakuliah_model();
 $controller->checkLoginSession();
 
 // Proses pemilihan mata kuliah jika ada kode kelas yang dipilih
-if(isset($_GET['kode_kelas'])) {
-    $selected_kelas = $_GET['kode_kelas'];
-    $controller->pilihMataKuliah($selected_kelas,$nim);
+if(isset($_POST['tipe'])) {
+    $selected_tipe = $_POST['tipe'];
+    $kelas = $controller->getKelasByTipe($selected_tipe); // Ambil data mata kuliah berdasarkan tipe
+} else {
+    // Jika tidak ada tipe yang dipilih, ambil semua data mata kuliah
+    $kelas = $controller->getAllKelas(); 
 }
-
-// Ambil data mata kuliah
-$kelas = $controller->getAllKelas(); 
 ?>
 
 <!DOCTYPE html>
@@ -93,36 +93,51 @@ $kelas = $controller->getAllKelas();
             <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>
           </div>
           <div class="main-body">
-          <table class="table">
+          <form action="../Matakuliah_controller/pilih_mk_contr" method="POST">
           <h2>Pilih Mata Kuliah</h2>
-<form action="../Matakuliah_controller/pilih_mk_contr" method="POST">
-<table>
-    <thead>
-        <tr>
-            <th>Kode Kelas</th>
-            <th>Mata Kuliah</th>
-            <th>Dosen Pengampu</th>
-            <th>Waktu</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($kelas as $row): ?>
+          <label for="tipe">Filter berdasarkan Tipe:</label>
+          <select name="tipe" id="tipe">
+                <option value=""disabled  <?php if (!isset($_POST['tipe'])) echo 'selected'; ?>>-- Pilih Tipe --</option>
+                <?php 
+                $uniqueTypes = $controller->getUniqueTipes();
+                foreach ($uniqueTypes as $type): ?>
+                    <option value="<?= htmlspecialchars($type['tipe']) ?>" <?php if (isset($_POST['tipe']) && $_POST['tipe'] == $type['tipe']) echo 'selected'; ?>>
+                        <?= htmlspecialchars($type['tipe']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+          <input type="submit" value="Filter">
+          </form>
+          <table class="table">
+            <thead>
                 <tr>
-                    <td><?= $row['kode_kelas'] ?></td>
-                    <td><?= $row['mata_kuliah'] ?></td>
-                    <td><?= $row['dosen'] ?></td>
-                    <td><?= $row['waktu'] ?></td>
-                    <td><input type="checkbox" name="pilihan_kelas[]" value="<?= $row['kode_kelas'] ?>"></td>
+                    <th>Kode Kelas</th>
+                    <th>Mata Kuliah</th>
+                    <th>Dosen Pengampu</th>
+                    <th>Waktu</th>
+                    <th>Aksi</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <input type="submit" name="submit" value="Pilih Mata Kuliah">
-    </form>
-    <a href="mata_kuliah"> return</a>
+            </thead>
+            <tbody>
+                <?php foreach ($kelas as $row): ?>
+                        <tr>
+                            <td><?= $row['kode_kelas'] ?></td>
+                            <td><?= $row['mata_kuliah'] ?></td>
+                            <td><?= $row['dosen'] ?></td>
+                            <td><?= $row['waktu'] ?></td>
+                            <td><input type="checkbox" name="pilihan_kelas[]" value="<?= $row['kode_kelas'] ?>"></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <input type="submit" name="submit" value="Pilih Mata Kuliah">
+            <a href="mata_kuliah"> return</a>
+        </div>
+      </div>
+    </section>
 </body>
 </html>
+
 
 <style>
      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");

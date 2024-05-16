@@ -12,7 +12,7 @@ if(isset($_POST['tipe'])) {
     $kelas = $controller->getKelasByTipe($selected_tipe); // Ambil data mata kuliah berdasarkan tipe
 } else {
     // Jika tidak ada tipe yang dipilih, ambil semua data mata kuliah
-    $kelas = $controller->getAllKelas(); 
+    $kelas = $controller->getJadwalKelas(); 
 }
 ?>
 
@@ -97,7 +97,7 @@ if(isset($_POST['tipe'])) {
           <h2>Pilih Mata Kuliah</h2>
           <label for="tipe">Filter berdasarkan Tipe:</label>
           <select name="tipe" id="tipe">
-                <option value=""disabled  <?php if (!isset($_POST['tipe'])) echo 'selected'; ?>>-- Pilih Tipe --</option>
+                <option value="" disabled <?php if (!isset($_POST['tipe'])) echo 'selected'; ?>>-- Pilih Tipe --</option>
                 <?php 
                 $uniqueTypes = $controller->getUniqueTipes();
                 foreach ($uniqueTypes as $type): ?>
@@ -108,6 +108,7 @@ if(isset($_POST['tipe'])) {
             </select>
           <input type="submit" value="Filter">
           </form>
+          <form action="../Matakuliah_controller/pilih_mk_contr" method="POST">
           <table class="table">
             <thead>
                 <tr>
@@ -123,7 +124,7 @@ if(isset($_POST['tipe'])) {
                         <tr>
                             <td><?= $row['kode_kelas'] ?></td>
                             <td><?= $row['mata_kuliah'] ?></td>
-                            <td><?= $row['dosen'] ?></td>
+                            <td><?= $row['nama'] ?></td>
                             <td><?= $row['waktu'] ?></td>
                             <td><input type="checkbox" name="pilihan_kelas[]" value="<?= $row['kode_kelas'] ?>"></td>
                         </tr>
@@ -132,11 +133,13 @@ if(isset($_POST['tipe'])) {
             </table>
             <input type="submit" name="submit" value="Pilih Mata Kuliah">
             <a href="mata_kuliah"> return</a>
+        </form>
         </div>
       </div>
     </section>
 </body>
 </html>
+
 
 
 <style>

@@ -22,16 +22,6 @@
               </a>
               </li>
               <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <button id="mahasiswaBtn">Informasi Data</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-tasks"></i>
-                <button id="nilaiBtn" class="nav-item">Informasi Nilai</button>
-              </a>
-              </li>
-              <li><a href="#">
                 <i class="fab fa-dochub"></i>
                 <select id="settingsDropdown" class="nav-item">
                     <option selected disabled>Settings</option>

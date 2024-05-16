@@ -58,11 +58,10 @@ $kelas = $controller->getAllKelasbyNIP($nip);
     <?php if (!empty($kelas)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
         <?php foreach ($kelas as $row): ?>
             <tr>
-                <td><input type="checkbox" name="kode_kelas[]" value="<?= $row['kode_kelas'] ?>"></td> 
                 <td><?= $row['kode_kelas'] ?></td>
                 <td><?= $row['mata_kuliah'] ?></td>
-                <td><?= $row['dosen'] ?></td>
                 <td><?= $row['waktu'] ?></td>
+                <td><?= $row['ruangan'] ?></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

@@ -58,7 +58,7 @@ $kelas = $controller->getAllKelasbyNIP($nip);
                 <td><?= $row['waktu'] ?></td>
                 <td>
                     <!-- Button to view students -->
-                    <form action="menilai_mahasiswa.php" method="GET">
+                    <form action="nilai_mahasiswa.php" method="GET">
                         <input type="hidden" name="kode_kelas" value="<?= $row['kode_kelas'] ?>">
                         <button href = "" type="submit">View Students </button>
                     </form>

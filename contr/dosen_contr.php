@@ -35,5 +35,13 @@ class Dosen_controller {
     public function insertNilai($nim, $kode_kelas, $nilai) {
         return $this->model->insertNilai($nim, $kode_kelas, $nilai);
     }
+    public function insertNilaii($nim, $kode_kelas, $nilai) {
+        require_once '../model/dosen-model.php';
+        $controller = new dosen_model();
+    }
+    public function getAndUpdateStudentsAndGrades($kode_kelas, $updateData = null) {
+        return $this->model->getAndUpdateStudentsAndGrades($kode_kelas, $updateData);
+    }
+    
 }
 ?>

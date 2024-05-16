@@ -12,21 +12,15 @@ if (isset($_GET['kode_kelas'])) {
     die("Kode kelas tidak ditemukan.");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-    $updateData = $_POST['nilai'];
-    $students = $controller->getAndUpdateStudentsAndGrades($kode_kelas, $updateData);
-    echo "Nilai telah diperbarui.";
-} else {
-    $students = $controller->getAndUpdateStudentsAndGrades($kode_kelas);
-}
+$students = $controller->getAllStudentsByKodeKelas($kode_kelas);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nilai Mahasiswa</title>
+    <title>Daftar Mata Kuliah</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,33 +42,64 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     </style>
 </head>
 <body>
-    <h2>Nilai Mahasiswa</h2>
-    <form action="" method="POST">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>NIM</th>
-                    <th>Nama</th>
-                    <th>Nilai</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($students as $row): ?>
+<div class="container">
+    <nav>
+        <div class="navbar">
+            <div class="logo">
+                <img src="/pic/logo.jpg" alt="">
+                <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
+            </div>
+            <ul>
+                <li><a href="#"><i class="fas fa-user"></i><button id="mata_kuliah" class="nav-item">Learning Path</button></a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i><button id="mahasiswaBtn">Informasi Data</button></a></li>
+                <li><a href="#"><i class="fas fa-tasks"></i><button id="nilaiBtn" class="nav-item">Informasi Nilai</button></a></li>
+                <li><a href="#"><i class="fab fa-dochub"></i>
+                    <select id="settingsDropdown" class="nav-item">
+                        <option selected disabled>Settings</option>
+                        <option value="change_email.html">Change Email</option>
+                        <option value="change_password.php">Change Password</option>
+                    </select>
+                </a></li>
+                <li><a href="#" class="logout"><i class="fas fa-sign-out-alt"></i><button id="logoutBtn" class="nav-item">Logout</button></a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="main">
+        <div class="main-top">
+            <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>
+        </div>
+        <div class="main-body">
+            <h2>Nilai Mahasiswa</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?= htmlspecialchars($row['nim']) ?></td>
-                        <td><?= htmlspecialchars($row['nama']) ?></td>
-                        <td>
-                            <input type="text" name="nilai[<?= htmlspecialchars($row['nim']) ?>]" value="<?= htmlspecialchars($row['nilai']) ?>">
-                        </td>
+                        <th>Nim</th>
+                        <th>Nama</th>
+                        <th>Nilai</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <input type="hidden" name="kode_kelas" value="<?= htmlspecialchars($kode_kelas) ?>">
-        <input type="submit" name="submit" value="Edit Nilai">
-    </form>
+                </thead>
+                <tbody>
+                    <?php foreach ($students as $row): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['nim']) ?></td>
+                            <td><?= htmlspecialchars($row['nama']) ?></td>
+                            <td><?= htmlspecialchars($row['nilai']) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <form action="menilai_mahasiswa.php" method="GET">
+                <input type="hidden" name="kode_kelas" value="<?= htmlspecialchars($kode_kelas) ?>">
+                <button type="submit">Edit Nilai</button>
+            </form>
+            <a href="dashboard_dosen.php">Return</a>
+        </div>
+    </section>
+</div>
 </body>
 </html>
+
 
 
 

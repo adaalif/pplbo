@@ -103,10 +103,37 @@ class Dosen_Model {
         }
     }
     public function getAllStudentsByKodeKelas($kode_kelas) {
-        $this->db->query('SELECT k*, nama b FROM data_kelas_mahasiswa k join nim b ON b.nim = k.nim  WHERE kode_kelas = :kode_kelas');
+        $this->db->query('SELECT nim, nama, nilai FROM nilai WHERE kode_kelas = :kode_kelas');
         $this->db->bind(':kode_kelas', $kode_kelas);
         return $this->db->resultSet();
     }
-    
+      
+    public function getStudentDataWithNilai() {
+        // Query untuk mengambil NIM, nama, dan nilai dari tabel data_kelas_mahasiswa dan nilai
+        $query = "SELECT d.nim, d.nama, n.nilai 
+                  FROM data_kelas_mahasiswa d 
+                  LEFT JOIN nilai n ON d.nim = n.nim";
+        
+        // Eksekusi query
+        $this->db->query($query);
+        
+        // Ambil hasil query sebagai array assosiatif
+        return $this->db->resultSet();
+    }    
+    public function getAndUpdateStudentsAndGrades($kode_kelas, $updateData = null) {
+        if ($updateData) {
+            foreach ($updateData as $nim => $nilai) {
+                $this->db->query('UPDATE nilai SET nilai = :nilai WHERE nim = :nim AND kode_kelas = :kode_kelas');
+                $this->db->bind(':nim', $nim);
+                $this->db->bind(':nilai', $nilai);
+                $this->db->bind(':kode_kelas', $kode_kelas);
+                $this->db->execute();
+            }
+        }
+
+        $this->db->query('SELECT nim, nama, nilai FROM nilai WHERE kode_kelas = :kode_kelas');
+        $this->db->bind(':kode_kelas', $kode_kelas);
+        return $this->db->resultSet();
+    }
 }
 ?>

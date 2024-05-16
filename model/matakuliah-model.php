@@ -105,7 +105,13 @@ public function getJadwalKelasByNIM($nim) {
     $this->bind(':nim', $nim);
     return $this->resultSet();
 }
-
+public function getJadwalKelas() {
+    $sql = "SELECT k.kode_kelas, k.mata_kuliah, k.waktu, d.nama
+            FROM kelas k
+            JOIN dosen d ON k.nip = d.nip";
+    $this->query($sql);
+    return $this->resultSet();
+}
 
 }
 ?>

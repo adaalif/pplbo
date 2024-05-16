@@ -31,6 +31,24 @@
                     </a>
                 </li>
                 <li>
+                <i class="fab fa-dochub"></i>
+                <select id="bantuanDropdown" class="nav-item">
+                    <option selected disabled>Bantuan</option>
+                    <option value="../user_manual.pdf">Panduan</option>
+                    <option value="http://localhost/pplbo/core/hubAdmin.php">Hubungi Admin</option>
+                </select>
+              </a>
+              </li>
+                <li><a href="#">
+                <i class="fab fa-dochub"></i>
+                <select id="settingsDropdown" class="nav-item">
+                    <option selected disabled>Settings</option>
+                    <option value="change_email.html">Change Email</option>
+                    <option value="change_password.php">Change Password</option>
+                </select>
+              </a>
+              </li>
+                <li>
                     <a href="#" class="logout">
                         <button id="logoutBtn" class="nav-item" onclick="window.location.href='index.php';">
                             <i class="fas fa-sign-out-alt"></i>
@@ -47,6 +65,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   const logoutBtn = document.getElementById('logoutBtn');
   const settingsDropdown = document.getElementById('settingsDropdown');
+  const bantuanDropdown = document.getElementById('bantuanDropdown');
   const mata_kuliah = document.getElementById('mata_kuliah');
   const nilaiBtn = document.getElementById('nilaiBtn'); 
   const mahasiswaBtn = document.getElementById('mahasiswaBtn');
@@ -69,6 +88,12 @@ mahasiswaBtn.addEventListener('click', function() {
 
   settingsDropdown.addEventListener('change', function() {
     const selectedOption = settingsDropdown.options[settingsDropdown.selectedIndex].value;
+    if (selectedOption) {
+      window.location.href = selectedOption;
+    }
+  });
+bantuanDropdown.addEventListener('change', function() {
+    const selectedOption = bantuanDropdown.options[bantuanDropdown.selectedIndex].value;
     if (selectedOption) {
       window.location.href = selectedOption;
     }

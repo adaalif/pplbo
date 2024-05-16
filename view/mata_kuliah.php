@@ -42,7 +42,7 @@ $kelas = $controller->getJadwalKelasByNIM($nim);
 </head>
 <body>
 <?php include 'sidebar.php'; ?>
-        
+
         <section class="main">
           <div class="main-top">
             <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>
@@ -75,7 +75,7 @@ $kelas = $controller->getJadwalKelasByNIM($nim);
         <?php endforeach; ?>
         <input type="submit" name="submit" value="Hapus Terpilih">
     <?php else: ?>
-        <p>Tidak ada mata kuliah yang tersedia.</p>
+        <p>Tidak ada mata kuliah yang terpilih.</p>
     <?php endif; ?>
 </form>
 

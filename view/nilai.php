@@ -2,15 +2,20 @@
 // Panggil file controller
 require_once '../contr/Matakuliah_controller.php';
 
-// Buat objek dari kelas StudentController
+// Buat objek dari kelas Matakuliah_model
 $controller = new Matakuliah_model();
 
 // Periksa sesi login
 $controller->checkLoginSession();
 $nim = $_SESSION['nim'];
 
-// Ambil data kelas
-$kelas = $controller->getAllKelasbyNIM($nim);
+// Ambil data mata kuliah dan nilai
+$mataKuliahDanNilai = $controller->getMataKuliahDanNilaiByNIM($nim);
+
+// Debugging: tampilkan data yang diambil
+// echo "<pre>";
+// print_r($mataKuliahDanNilai);
+// echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -45,79 +50,55 @@ $kelas = $controller->getAllKelasbyNIM($nim);
 </head>
 <body>
 <div class="container">
-        <nav>
-          <div class="navbar">
+    <nav>
+        <div class="navbar">
             <div class="logo">
-              <img src="/pic/logo.jpg" alt="">
-              <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
+                <img src="/pic/logo.jpg" alt="">
+                <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
             </div>
             <ul>
-              <li><a href="#">
-                <i class="fas fa-user"></i>
-                <button id="mata_kuliah" class="nav-item">Learning Path</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <button id="mahasiswaBtn">Informasi Data</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-tasks"></i>
-                <button id="nilaiBtn" class="nav-item">Informasi Nilai</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fab fa-dochub"></i>
-                <select id="settingsDropdown" class="nav-item">
-                    <option selected disabled>Settings</option>
-                    <option value="change_email.html">Change Email</option>
-                    <option value="change_password.php">Change Password</option>
-                </select>
-              </a>
-              </li>
-              <li><a href="#" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <button id="logoutBtn" class="nav-item">Logout</button>
-              </a>
-              </li>
+                <li><a href="#"><i class="fas fa-user"></i><button id="mata_kuliah" class="nav-item">Learning Path</button></a></li>
+                <li><a href="#"><i class="fas fa-chart-bar"></i><button id="mahasiswaBtn">Informasi Data</button></a></li>
+                <li><a href="#"><i class="fas fa-tasks"></i><button id="nilaiBtn" class="nav-item">Informasi Nilai</button></a></li>
+                <li><a href="#"><i class="fab fa-dochub"></i><select id="settingsDropdown" class="nav-item"><option selected disabled>Settings</option><option value="change_email.html">Change Email</option><option value="change_password.php">Change Password</option></select></a></li>
+                <li><a href="#" class="logout"><i class="fas fa-sign-out-alt"></i><button id="logoutBtn" class="nav-item">Logout</button></a></li>
             </ul>
-          </div>
-        </nav>
-    
-        <section class="main">
-          <div class="main-top">
+        </div>
+    </nav>
+
+    <section class="main">
+        <div class="main-top">
             <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>
-          </div>
-          <div class="main-body">
-          <table class="table">
-          <h2>Daftar Mata Kuliah</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Mata Kuliah</th>
-            <th>nilai</th>
-
-        </tr>
-    </thead>
-    <tbody>
-    <?php if (!empty($kelas)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
-        <?php foreach ($kelas as $row): ?>
-            <tr>
-                <td><?= $row['mata_kuliah'] ?></td>
-                <td><?= $row['nilai'] ?></td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>Tidak ada mata kuliah yang tersedia.</p>
-    <?php endif; ?>
-    </tbody>
-    
-</table>
-<a href="../login/dashboard"> return</a>
+        </div>
+        <div class="main-body">
+            <h2>Daftar Mata Kuliah</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mata Kuliah</th>
+                        <th>Nilai</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if (!empty($mataKuliahDanNilai)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
+                    <?php foreach ($mataKuliahDanNilai as $row): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['mata_kuliah'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?= htmlspecialchars($row['nilai'], ENT_QUOTES, 'UTF-8') ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr><td colspan="2">Tidak ada mata kuliah yang tersedia.</td></tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+            <a href="../login/dashboard">Return</a>
+        </div>
+    </section>
+</div>
 </body>
 </html>
+
 
 <style>
      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");

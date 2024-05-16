@@ -85,8 +85,27 @@ public function getKelasByTipe($tipe) {
     return $this->resultSet();
 }
 
-    
-    
+public function getMataKuliahDanNilaiByNIM($nim) {
+    $sql = "SELECT kelas.mata_kuliah, nilai.nilai 
+            FROM kelas 
+            JOIN nilai ON kelas.kode_kelas = nilai.kode_kelas 
+            WHERE nilai.nim = :nim";
+    $this->query($sql);
+    $this->bind(':nim', $nim);
+    return $this->resultSet();
+}
+
+public function getJadwalKelasByNIM($nim) {
+    $sql = "SELECT k.kode_kelas, k.mata_kuliah, k.waktu, k.ruangan, k.tipe, d.nama
+            FROM kelas k
+            JOIN data_kelas_mahasiswa dkm ON k.kode_kelas = dkm.kode_kelas
+            JOIN dosen d ON k.nip = d.nip
+            WHERE dkm.nim = :nim";
+    $this->query($sql);
+    $this->bind(':nim', $nim);
+    return $this->resultSet();
+}
+
 
 }
 ?>

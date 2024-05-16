@@ -51,20 +51,23 @@ $kelas = $controller->getAllKelasbyNIP($nip);
             <th>Kode Kelas</th>
             <th>Mata Kuliah</th>
             <th>Waktu</th>
+            <th>Ruangan</th>
         </tr>
     </thead>
     <tbody>
-        <!-- Data mata kuliah akan dimasukkan di sini menggunakan PHP -->
-        <?php
-        // Ambil data dari PHP dan tampilkan di sini
-        foreach ($kelas as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['kode_kelas'] . "</td>";
-            echo "<td>" . $row['mata_kuliah'] . "</td>";
-            echo "<td>" . $row['waktu'] . "</td>";
-            echo "</tr>";
-        }
-        ?>
+    <?php if (!empty($kelas)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
+        <?php foreach ($kelas as $row): ?>
+            <tr>
+                <td><input type="checkbox" name="kode_kelas[]" value="<?= $row['kode_kelas'] ?>"></td> 
+                <td><?= $row['kode_kelas'] ?></td>
+                <td><?= $row['mata_kuliah'] ?></td>
+                <td><?= $row['dosen'] ?></td>
+                <td><?= $row['waktu'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Tidak ada mata kuliah yang tersedia.</p>
+    <?php endif; ?>
     </tbody>
 </table>
 <a href="dashboard_dosen.php"> return</a>

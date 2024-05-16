@@ -10,7 +10,7 @@ $controller->checkLoginSession();
 $nim = $_SESSION['nim'];
 
 // Ambil data kelas
-$kelas = $controller->getAllKelasbyNIM($nim);
+$kelas = $controller->getJadwalKelasByNIM($nim);
 ?>
 
 <!DOCTYPE html>
@@ -99,6 +99,7 @@ $kelas = $controller->getAllKelasbyNIM($nim);
             <th>Mata Kuliah</th>
             <th>Dosen Pengampu</th>
             <th>Waktu</th>
+            <th>Ruangan</th>
         </tr>
     </thead>
     <tbody>
@@ -109,8 +110,9 @@ $kelas = $controller->getAllKelasbyNIM($nim);
                 <td><input type="checkbox" name="kode_kelas[]" value="<?= $row['kode_kelas'] ?>"></td> 
                 <td><?= $row['kode_kelas'] ?></td>
                 <td><?= $row['mata_kuliah'] ?></td>
-                <td><?= $row['dosen'] ?></td>
+                <td><?= $row['nama'] ?></td>
                 <td><?= $row['waktu'] ?></td>
+                <td><?= $row['ruangan'] ?></td>
             </tr>
         <?php endforeach; ?>
         <input type="submit" name="submit" value="Hapus Terpilih">

@@ -20,10 +20,7 @@ $kelas = $controller->getJadwalKelasByNIM($nim);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
     <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
         body {
             font-family: Arial, sans-serif;
         }
@@ -44,47 +41,8 @@ $kelas = $controller->getJadwalKelasByNIM($nim);
     </style>
 </head>
 <body>
-<div class="container">
-        <nav>
-          <div class="navbar">
-            <div class="logo">
-              <img src="/pic/logo.jpg" alt="">
-              <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
-            </div>
-            <ul>
-              <li><a href="#">
-                <i class="fas fa-user"></i>
-                <button id="mata_kuliah" class="nav-item">Learning Path</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <button id="mahasiswaBtn">Informasi Data</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-tasks"></i>
-                <button id="nilaiBtn" class="nav-item">Informasi Nilai</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fab fa-dochub"></i>
-                <select id="settingsDropdown" class="nav-item">
-                    <option selected disabled>Settings</option>
-                    <option value="change_email.html">Change Email</option>
-                    <option value="change_password.php">Change Password</option>
-                </select>
-              </a>
-              </li>
-              <li><a href="#" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <button id="logoutBtn" class="nav-item">Logout</button>
-              </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-    
+<?php include 'sidebar.php'; ?>
+        
         <section class="main">
           <div class="main-top">
             <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>

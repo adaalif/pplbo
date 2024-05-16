@@ -7,47 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 </head>
 <body>
-      <div class="container">
-        <nav>
-          <div class="navbar">
-            <div class="logo">
-              <img src="/pic/logo.jpg" alt="">
-              <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
-            </div>
-            <ul>
-              <li><a href="#">
-                <i class="fas fa-user"></i>
-                <button id="mata_kuliah" class="nav-item">Learning Path</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-chart-bar"></i>
-                <button id="mahasiswaBtn">Informasi Data</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fas fa-tasks"></i>
-                <button id="nilaiBtn" class="nav-item">Informasi Nilai</button>
-              </a>
-              </li>
-              <li><a href="#">
-                <i class="fab fa-dochub"></i>
-                <select id="settingsDropdown" class="nav-item">
-                    <option selected disabled>Settings</option>
-                    <option value="change_email.html">Change Email</option>
-                    <option value="change_password.php">Change Password</option>
-                </select>
-              </a>
-              </li>
-              <li><a href="#" class="logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <button id="logoutBtn" class="nav-item">Logout</button>
-              </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-    
+     
+<?php include 'sidebar.php'; ?>
         <section class="main">
           <div class="main-top">
             <p>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</p>
@@ -65,48 +26,7 @@
           </div>
     </body>
 </html>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const logoutBtn = document.getElementById('logoutBtn');
-  const settingsDropdown = document.getElementById('settingsDropdown');
-  const mata_kuliah = document.getElementById('mata_kuliah');
-  const nilaiBtn = document.getElementById('nilaiBtn'); // Select the nilai button
-  const mahasiswaBtn = document.getElementById('mahasiswaBtn'); // Select the data mahasiswa button
 
-// Add event listener for mahasiswa button
-mahasiswaBtn.addEventListener('click', function() {
-  // Redirect user to data mahasiswa page
-  window.location.href = '../Mahasiswa_controller/data';
-});
-
-  // Add event listener for logout button
-  logoutBtn.addEventListener('click', function() {
-    // Redirect user to login page
-    window.location.href = 'index.php';
-  });
-
-  // Add event listener for mata kuliah button
-  mata_kuliah.addEventListener('click', function() {
-    // Redirect user to mata kuliah page
-    window.location.href = '../Matakuliah_controller/index';
-  });
-
-  // Add event listener for nilai button
-  nilaiBtn.addEventListener('click', function() {
-    // Redirect user to nilai page
-    window.location.href = '../Mahasiswa_controller/nilai';
-  });
-
-  // Add event listener for settings dropdown
-  settingsDropdown.addEventListener('change', function() {
-    // Redirect user to the selected settings page
-    const selectedOption = settingsDropdown.options[settingsDropdown.selectedIndex].value;
-    if (selectedOption) {
-      window.location.href = selectedOption;
-    }
-  });
-});
-</script>
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 *{

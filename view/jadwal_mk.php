@@ -18,10 +18,7 @@ $kelas = $controller->getAllKelasbyNIP($nip);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
     <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
         body {
             font-family: Arial, sans-serif;
         }

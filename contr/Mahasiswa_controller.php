@@ -58,20 +58,24 @@ class Mahasiswa_controller extends Controller {
     
             // Call the updateMahasiswa function
             $result = $model->updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat);
-            
+    
             if ($result) {
+                // Jika berhasil, tampilkan popup berhasil
+                echo '<script>alert("Data berhasil diperbarui.");</script>';
                 http_response_code(200);
-                $this-> view('data');
             } else {
+                // Jika gagal, tampilkan popup gagal
+                echo '<script>alert("Gagal memperbarui data. Silakan coba lagi.");</script>';
                 http_response_code(500);
-                $this-> view('data');
             }
+    
+            // Redirect back to the data page
+            $this->view('data');
         } else {
             // Kirim respons ke klien jika terjadi kesalahan
             http_response_code(400);
             echo "Permintaan tidak valid.";
         }
     }
-    
-    }
+}    
 ?>

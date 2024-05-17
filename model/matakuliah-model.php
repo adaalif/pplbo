@@ -62,17 +62,21 @@ class Matakuliah_model extends Database {
         }
     }
     public function hapusMataKuliah($kode_kelas, $nim){
-        $this->query('DELETE FROM data_kelas_mahasiswa WHERE kode_kelas=:kode_kelas and nim = :nim');
-        $this->bind(':kode_kelas', $kode_kelas);
-        $this->bind(':nim', $nim);
-    
-        // Execute
-        if($this->execute()){
-            return true;
-        } else {
+        try {
+            $this->query('DELETE FROM data_kelas_mahasiswa WHERE kode_kelas=:kode_kelas and nim = :nim');
+            $this->bind(':kode_kelas', $kode_kelas);
+            $this->bind(':nim', $nim);
+            $this->execute();
+            if ($this->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
             return false;
         }
     }
+    
     // Di dalam Matakuliah_model
 
     public function getUniqueTipes() {

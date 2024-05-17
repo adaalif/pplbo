@@ -4,13 +4,14 @@ require_once '../contr/dosen_contr.php';
 $controller = new Dosen_Controller();
 $controller->checkLoginSession();
 
-if (isset($_GET['kode_kelas'])) {
-    $kode_kelas = $_GET['kode_kelas'];
-} elseif (isset($_POST['kode_kelas'])) {
-    $kode_kelas = $_POST['kode_kelas'];
-} else {
-    die("Kode kelas tidak ditemukan.");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['kode_kelas'])) {
+        $kode_kelas = $_POST['kode_kelas'];
+    } else {
+        die("Kode kelas tidak ditemukan.");
+    }
 }
+
 
 $students = $controller->getAllStudentsByKodeKelas($kode_kelas);
 ?>
@@ -49,19 +50,7 @@ $students = $controller->getAllStudentsByKodeKelas($kode_kelas);
                 <img src="/pic/logo.jpg" alt="">
                 <h1>SISTEM INFORMASI AKADEMIK KEMAHASISWAAN</h1>
             </div>
-            <ul>
-                <li><a href="#"><i class="fas fa-user"></i><button id="mata_kuliah" class="nav-item">Learning Path</button></a></li>
-                <li><a href="#"><i class="fas fa-chart-bar"></i><button id="mahasiswaBtn">Informasi Data</button></a></li>
-                <li><a href="#"><i class="fas fa-tasks"></i><button id="nilaiBtn" class="nav-item">Informasi Nilai</button></a></li>
-                <li><a href="#"><i class="fab fa-dochub"></i>
-                    <select id="settingsDropdown" class="nav-item">
-                        <option selected disabled>Settings</option>
-                        <option value="change_email.html">Change Email</option>
-                        <option value="change_password.php">Change Password</option>
-                    </select>
-                </a></li>
-                <li><a href="#" class="logout"><i class="fas fa-sign-out-alt"></i><button id="logoutBtn" class="nav-item">Logout</button></a></li>
-            </ul>
+            
         </div>
     </nav>
     
@@ -89,11 +78,11 @@ $students = $controller->getAllStudentsByKodeKelas($kode_kelas);
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <form action="menilai_mahasiswa.php" method="GET">
+            <form action="menilai_mahasiswa" method="post">
                 <input type="hidden" name="kode_kelas" value="<?= htmlspecialchars($kode_kelas) ?>">
                 <button type="submit">Edit Nilai</button>
             </form>
-            <a href="dashboard_dosen.php">Return</a>
+            <a href="dashboard">Return</a>
         </div>
     </section>
 </div>

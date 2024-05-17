@@ -70,6 +70,6 @@ $kelas = $controller->getAllKelasbyNIP($nip);
     </tbody>
 </table>
 <a href="dashboard_dosen.php"> return</a>
-<a href="insert_nilai.php"> isi nilai mata kuliah</a>
+<a href="insert_nilai"> isi nilai mata kuliah</a>
 </body>
 </html>

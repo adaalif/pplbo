@@ -1,21 +1,10 @@
 <?php
-// Panggil file controller
 require_once '../contr/Matakuliah_controller.php';
-
-// Buat objek dari kelas Matakuliah_model
 $controller = new Matakuliah_model();
-
-// Periksa sesi login
 $controller->checkLoginSession();
 $nim = $_SESSION['nim'];
 
-// Ambil data mata kuliah dan nilai
 $mataKuliahDanNilai = $controller->getMataKuliahDanNilaiByNIM($nim);
-
-// Debugging: tampilkan data yang diambil
-// echo "<pre>";
-// print_r($mataKuliahDanNilai);
-// echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -81,15 +70,22 @@ $mataKuliahDanNilai = $controller->getMataKuliahDanNilaiByNIM($nim);
                 </thead>
                 <tbody>
                 <?php if (!empty($mataKuliahDanNilai)): ?> <!-- Cek apakah ada mata kuliah yang ditampilkan -->
-                    <?php foreach ($mataKuliahDanNilai as $row): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($row['mata_kuliah'], ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?= htmlspecialchars($row['nilai'], ENT_QUOTES, 'UTF-8') ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr><td colspan="2">Tidak ada mata kuliah yang tersedia.</td></tr>
-                <?php endif; ?>
+    <?php foreach ($mataKuliahDanNilai as $row): ?>
+        <tr>
+            <td><?= htmlspecialchars($row['mata_kuliah'], ENT_QUOTES, 'UTF-8') ?></td>
+            <?php if ($row['nilai'] !== null): ?> <!-- Cek apakah nilai tidak null -->
+                <td><?= htmlspecialchars($row['nilai'], ENT_QUOTES, 'UTF-8') ?></td>
+            <?php else: ?>
+                <td>-</td> <!-- Jika nilai null, tampilkan tanda '-' -->
+            <?php endif; ?>
+        </tr>
+    <?php endforeach; ?>
+<?php else: ?>
+    <tr>
+        <td colspan="2">Tidak ada data nilai.</td> <!-- Tampilkan pesan jika tidak ada data nilai -->
+    </tr>
+<?php endif; ?>
+
                 </tbody>
             </table>
             <a href="../login/dashboard">Return</a>

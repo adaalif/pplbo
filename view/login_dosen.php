@@ -8,13 +8,13 @@
      <!-- font awesome icons -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css stylesheet -->
-    <link rel="stylesheet" href="yes.css">
+    <link rel="stylesheet" href="../../Public/yes.css">
 </head>
 <body>
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-          <form action="../contr/login_dosen_contr.php" method="POST">
+          <form action="../login/login_dosen" method="POST">
                 <h1>Sistem Informasi Administrasi Kemahasiswaan</h1><br>
                 <h3>Masuk</h3>
                 <div class="infield">

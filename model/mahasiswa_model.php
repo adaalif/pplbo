@@ -7,23 +7,17 @@ class Mahasiswa_Model extends Database {
         $this->query($query);
         $this->bind(1, $nim);
 
-        // Execute query
         $result = $this->single();
 
-        // Check if user exists
         if ($result) {
-            // Verify password
             if ($password === $result['password']) {
-                // Password is correct
                 session_start();
                 $_SESSION["nim"] = $result['nim'];
                 return true;
             } else {
-                // Incorrect password
                 return false;
             }
         } else {
-            // User not found
             return false;
         }
     }
@@ -75,7 +69,7 @@ class Mahasiswa_Model extends Database {
         $this->query('SELECT nama FROM nim WHERE nim=:nim');
         $this->bind(':nim', $nim);
         $result = $this->single();
-        return $result['nama_mahasiswa'];
+        return $result['nama'];
     }
     public function getAllMahasiswa($nim) {
         $this->query('SELECT * FROM data_mahasiswa WHERE nim = :nim');
@@ -106,9 +100,10 @@ class Mahasiswa_Model extends Database {
         if ($this->execute()) {
             return true; // Return true if the query executed successfully
         } else {
-            return false; // Return false if there was an error
+            return false; 
         }
     }
+    
     
     
 }

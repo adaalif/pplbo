@@ -32,7 +32,7 @@ require '../init.php';
 
             </form>
             <a href="login/register"> register</a>
-
+            <a href="dosen/index"> dosen</a>
         </div>
 
 </body>

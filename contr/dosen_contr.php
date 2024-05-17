@@ -1,5 +1,5 @@
 <?php
-require_once '../model/dosen_Model.php'; // Use the correct file path
+require_once '../model/dosen_Model.php'; 
 
 class Dosen_controller {
     private $model;

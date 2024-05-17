@@ -15,8 +15,9 @@ class Matakuliah_controller extends Controller{
     }
     public function pilih_mk_contr(){
         require_once '../model/matakuliah-model.php';
-    $controller = new Matakuliah_model(); // Sesuaikan dengan nama controller Anda
-
+        require_once '../model/mahasiswa_model.php';
+    $controller = new Matakuliah_model(); 
+    $mahasiswa = new Mahasiswa_model();
     $controller->checkLoginSession();
 
     if(isset($_POST['submit']) && isset($_POST['pilihan_kelas'])) {
@@ -24,16 +25,19 @@ class Matakuliah_controller extends Controller{
 
         $nim = $_SESSION['nim'];
         foreach ($selected_kelas as $kode_kelas) {
-            foreach ($selected_kelas as $kode_kelas) {
+        
                 if($controller->cekPilihanMataKuliah($kode_kelas, $nim)){
                     echo "<script>alert('Anda sudah memilih mata kuliah ini');</script>";
                     $this-> view('pilih_mk');
                 } else {
                     $controller->pilihMataKuliah($kode_kelas, $nim);
+                    $nama = $mahasiswa -> getNama($nim);
+                    $controller->insertMahasiswa($nama,$nim,$kode_kelas);
                     echo "<script>alert('Pemilihan kelas berhasil');</script>";
                     $this-> view('pilih_mk');
-                }
+                
             }
+           
             
         }
     } else {
@@ -51,11 +55,8 @@ class Matakuliah_controller extends Controller{
                 $nim = $_SESSION['nim'];
                 
                 foreach($kode_kelas_terpilih as $kode_kelas){
-                    if($model->hapusMataKuliah($kode_kelas, $nim)){
-                        echo "<script>alert('Mata kuliah berhasil dihapus.');</script>";
-                    } else {
-                        echo "<script>alert('Gagal menghapus mata kuliah.');</script>";
-                    }
+                    $model->hapusMataKuliah($kode_kelas, $nim);
+                        
                 }
                 
                 $this->view('mata_kuliah');

@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         </table>
         <input type="hidden" name="kode_kelas" value="<?= htmlspecialchars($kode_kelas) ?>">
         <input type="submit" name="submit" value="Edit Nilai">
+        <a href="dashboard"> kembali ke dashboard</a>
     </form>
 </body>
 </html>

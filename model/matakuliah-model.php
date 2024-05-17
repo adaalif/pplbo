@@ -62,22 +62,26 @@ class Matakuliah_model extends Database {
         }
     }
     public function hapusMataKuliah($kode_kelas, $nim){
-        try {
-            $this->query('DELETE FROM data_kelas_mahasiswa WHERE kode_kelas=:kode_kelas and nim = :nim');
-            $this->bind(':kode_kelas', $kode_kelas);
-            $this->bind(':nim', $nim);
-            $this->execute();
-            if ($this->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (PDOException $e) {
-            return false;
-        }
+    if($this->cekMahasiswaSudahAdaNilai($nim,$kode_kelas)) {
+        echo "<script>alert('Mahasiswa sudah memiliki nilai di tabel nilai dan tidak bisa dihapus.');</script>";
+        return false; 
     }
+    else {
+        $this->query('DELETE FROM data_kelas_mahasiswa WHERE kode_kelas=:kode_kelas and nim = :nim');
+        $this->bind(':kode_kelas', $kode_kelas);
+        $this->bind(':nim', $nim);
+        $this->execute(); 
+
+        $this->query('DELETE FROM nilai WHERE nim = :nim AND kode_kelas = :kode_kelas');
+        $this->bind(':kode_kelas', $kode_kelas);
+        $this->bind(':nim', $nim);
+        $this->execute(); 
+
+        return true; 
+    }
+}
+
     
-    // Di dalam Matakuliah_model
 
     public function getUniqueTipes() {
         $this->query("SELECT DISTINCT tipe FROM kelas");
@@ -115,6 +119,31 @@ public function getJadwalKelas() {
             JOIN dosen d ON k.nip = d.nip";
     $this->query($sql);
     return $this->resultSet();
+}
+public function insertMahasiswa($nama, $nim, $kode_kelas) {
+    $this->query('INSERT INTO nilai (nama, nim, kode_kelas) VALUES (:nama, :nim, :kode_kelas)');
+    $this->bind(':nama', $nama);
+    $this->bind(':nim', $nim);
+    $this->bind(':kode_kelas', $kode_kelas);
+    if ($this->execute()) {
+        return true; 
+    } else {
+        return false; 
+    }
+}
+public function cekMahasiswaSudahAdaNilai($nim, $kode_kelas) {
+    $this->query('SELECT nilai FROM nilai WHERE nim = :nim and kode_kelas = :kode_kelas');
+    $this->bind(':nim', $nim);
+    $this->bind(':kode_kelas', $kode_kelas);
+
+    $this->execute();
+    
+    $result = $this->single(); 
+    if($result && $result['nilai'] !== null){
+        return true; 
+    } else {
+        return false; 
+    }
 }
 
 }

@@ -1,5 +1,5 @@
 <?php
-require_once '../core/Database.php'; // Use the correct file name
+require_once '../core/Database.php'; 
 
 class Dosen_Model {
     private $db;
@@ -9,28 +9,21 @@ class Dosen_Model {
     }
 
     public function login($nip, $password) {
-        // Prepare query
         $query = "SELECT nip, password FROM user_dosen WHERE nip = ?";
         $this->db->query($query);
         $this->db->bind(1, $nip);
 
-        // Execute query
         $result = $this->db->single();
 
-        // Check if user exists
         if ($result) {
-            // Verify password
             if ($password === $result['password']) {
-                // Password is correct
                 session_start();
                 $_SESSION["nip"] = $result['nip'];
                 return true;
             } else {
-                // Incorrect password
                 return false;
             }
         } else {
-            // User not found
             return false;
         }
     }
@@ -109,15 +102,12 @@ class Dosen_Model {
     }
       
     public function getStudentDataWithNilai() {
-        // Query untuk mengambil NIM, nama, dan nilai dari tabel data_kelas_mahasiswa dan nilai
         $query = "SELECT d.nim, d.nama, n.nilai 
                   FROM data_kelas_mahasiswa d 
                   LEFT JOIN nilai n ON d.nim = n.nim";
         
-        // Eksekusi query
         $this->db->query($query);
         
-        // Ambil hasil query sebagai array assosiatif
         return $this->db->resultSet();
     }    
     public function getAndUpdateStudentsAndGrades($kode_kelas, $updateData = null) {

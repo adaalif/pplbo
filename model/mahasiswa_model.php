@@ -2,28 +2,21 @@
 
 class Mahasiswa_Model extends Database {
     public function login($nim, $password) {
-        // Prepare query
         $query = "SELECT nim, password FROM user WHERE nim = ?";
         $this->query($query);
         $this->bind(1, $nim);
 
-        // Execute query
         $result = $this->single();
 
-        // Check if user exists
         if ($result) {
-            // Verify password
             if ($password === $result['password']) {
-                // Password is correct
                 session_start();
                 $_SESSION["nim"] = $result['nim'];
                 return true;
             } else {
-                // Incorrect password
                 return false;
             }
         } else {
-            // User not found
             return false;
         }
     }
@@ -40,7 +33,6 @@ class Mahasiswa_Model extends Database {
     $nim = htmlspecialchars(strip_tags($nim));
     $password = htmlspecialchars(strip_tags($password));
 
-    // Prepare and execute the check query
     $checkQuery = "SELECT * FROM nim WHERE nim=:nim";
     $this->query($checkQuery);
     $this->bind(':nim', $nim);
@@ -50,7 +42,6 @@ class Mahasiswa_Model extends Database {
         return "NIM tidak ditemukan dalam database";
     }
 
-    // Prepare and execute the insert query
     $insertQuery = "INSERT INTO user (nim, password) VALUES (:nim, :password)";
     $this->query($insertQuery);
     $this->bind(':nim', $nim);
@@ -75,11 +66,11 @@ class Mahasiswa_Model extends Database {
         $this->query('SELECT nama FROM nim WHERE nim=:nim');
         $this->bind(':nim', $nim);
         $result = $this->single();
-        return $result['nama_mahasiswa'];
+        return $result['nama'];
     }
     public function getAllMahasiswa($nim) {
         $this->query('SELECT * FROM data_mahasiswa WHERE nim = :nim');
-        $this->bind(':nim', $nim); // Binding nilai parameter nim
+        $this->bind(':nim', $nim); 
         return $this->resultSet();
     }
     
@@ -93,26 +84,21 @@ class Mahasiswa_Model extends Database {
         }
     }
     public function updateMahasiswa($nim, $tempat_lahir, $tanggal_lahir, $alamat) {
-        try {
-            // Query SQL untuk melakukan update data
-            $this->query('UPDATE data_mahasiswa SET tempat_lahir = :tempat_lahir, tanggal_lahir = :tanggal_lahir, alamat = :alamat WHERE nim = :nim');
-        
-            // Binding parameter
-            $this->bind(':nim', $nim);
-            $this->bind(':tempat_lahir', $tempat_lahir);
-            $this->bind(':tanggal_lahir', $tanggal_lahir);
-            $this->bind(':alamat', $alamat);
-        
-            // Eksekusi query
-            $this->execute();
+        $this->query('UPDATE data_mahasiswa SET tempat_lahir = :tempat_lahir, tanggal_lahir = :tanggal_lahir, alamat = :alamat WHERE nim = :nim');
     
-            // Jika eksekusi query berhasil, return true
-            return true;
-        } catch (PDOException $e) {
-            // Jika terjadi kesalahan, tangkap exception dan return false
-            return false;
+        $this->bind(':nim', $nim);
+        $this->bind(':tempat_lahir', $tempat_lahir);
+        $this->bind(':tanggal_lahir', $tanggal_lahir);
+        $this->bind(':alamat', $alamat);
+    
+        if ($this->execute()) {
+            return true; 
+        } else {
+            return false; 
         }
     }
+    
+    
     
 }
 ?>

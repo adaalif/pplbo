@@ -30,21 +30,19 @@
                         </button>
                     </a>
                 </li>
-                <li>
-                <i class="fab fa-dochub"></i>
+                
+                <li><a href="#">
+                <button id="settingsDropdown" class="nav-item">
+                <i class="fas fa-cog"></i>Ganti Password
+                </button>
+              </a>
+              </li>
+              <li>
+              <i class="far fa-question-circle"></i>
                 <select id="bantuanDropdown" class="nav-item">
                     <option selected disabled>Bantuan</option>
                     <option value="../user_manual.pdf">Panduan</option>
                     <option value="http://localhost/pplbo/core/hubAdmin.php">Hubungi Admin</option>
-                </select>
-              </a>
-              </li>
-                <li><a href="#">
-                <i class="fab fa-dochub"></i>
-                <select id="settingsDropdown" class="nav-item">
-                    <option selected disabled>Settings</option>
-                    <option value="change_email.html">Change Email</option>
-                    <option value="change_password.php">Change Password</option>
                 </select>
               </a>
               </li>

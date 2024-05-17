@@ -30,12 +30,10 @@ class Mahasiswa_controller extends Controller {
         $this->view('data');
     }
     public function getAllMahasiswa($nim) {
-        // Buat objek model
         $model = new Mahasiswa_model();
 
         return  $model->getAllMahasiswa($nim);
 
-        // Jika berhasil me
     }
     public function checkLoginSession(){
         $model = new Mahasiswa_model();

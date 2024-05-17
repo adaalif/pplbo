@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   mata_kuliah.addEventListener('click', function() {
     // Redirect user to login page
-    window.location.href = 'jadwal_mk.php';
+    window.location.href = '../dosen/jadwal';
   });
   // Add event listener for settings dropdown
   settingsDropdown.addEventListener('change', function() {

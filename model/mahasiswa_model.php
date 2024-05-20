@@ -22,37 +22,48 @@ class Mahasiswa_Model extends Database {
     }
 
     public function checkNim($nim) {
-        $this->query("SELECT nim FROM mahasiswa WHERE nim = :nim");
+        $this->query("SELECT nim FROM nim WHERE nim = :nim");
         $this->bind(':nim', $nim);
         $this->execute();
         $result = $this->resultSet();
         return count($result) == 1;
     }
+    public function checkUserNim($nim) {
+        $this->query("SELECT nim FROM user WHERE nim = :nim");
+        $this->bind(':nim', $nim);
+        $this->execute();
+        $result = $this->resultSet();
+        return count($result) > 0;
+    }    
 
     public function registerUser($nim, $password) {
-    $nim = htmlspecialchars(strip_tags($nim));
-    $password = htmlspecialchars(strip_tags($password));
-
-    $checkQuery = "SELECT * FROM nim WHERE nim=:nim";
-    $this->query($checkQuery);
-    $this->bind(':nim', $nim);
-    $result = $this->single();
-
-    if (!$result) {
-        return "NIM tidak ditemukan dalam database";
+        // Sanitize input
+        $nim = htmlspecialchars(strip_tags($nim));
+        $password = htmlspecialchars(strip_tags($password));
+    
+        // Check if NIM exists in the mahasiswa table
+        if (!$this->checkNim($nim)) {
+            return "NIM tidak ditemukan dalam database";
+        }
+    
+        // Check if NIM already exists in the user table
+        if ($this->checkUserNim($nim)) {
+            return "NIM sudah terdaftar";
+        }
+    
+        // If NIM found in mahasiswa and not in user, proceed with registration
+        $insertQuery = "INSERT INTO user (nim, password) VALUES (:nim, :password)";
+        $this->query($insertQuery);
+        $this->bind(':nim', $nim);
+        $this->bind(':password', $password); // Always hash passwords!
+    
+        if ($this->execute()) {
+            return "Berhasil registrasi";
+        } else {
+            return "Gagal registrasi";
+        }
     }
-
-    $insertQuery = "INSERT INTO user (nim, password) VALUES (:nim, :password)";
-    $this->query($insertQuery);
-    $this->bind(':nim', $nim);
-    $this->bind(':password', $password);
-
-    if ($this->execute()) {
-        return "Berhasil registrasi";
-    } else {
-        return true;
-    }
-}
+    
 
 
     public function validateStudent($nim) {

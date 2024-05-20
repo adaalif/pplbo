@@ -29,6 +29,7 @@
                     <input type="password" name="confirm_password" placeholder="Konfirmasi Kata Sandi" />
                     <label></label>
                 </div>
+                <p><a href="http://localhost/pplbo/Public/">Login</a></p>
                 <button>Daftar</button>
             </form>
         </div>

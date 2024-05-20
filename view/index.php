@@ -28,11 +28,10 @@ require '../init.php';
                     <input type="password" name="password" placeholder="Kata Sandi" />
                     <label></label>
                 </div>
+                <p><a href="login/register">Belum punya akun? Register</a></p>
                 <button>Masuk</button>
 
             </form>
-            <a href="login/register"> register</a>
-            <a href="dosen/index"> dosen</a>
         </div>
 
 </body>

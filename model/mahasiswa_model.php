@@ -57,12 +57,15 @@ class Mahasiswa_Model extends Database {
         $this->bind(':nim', $nim);
         $this->bind(':password', $password); // Always hash passwords!
     
+        // Execute the query
         if ($this->execute()) {
             return "Berhasil registrasi";
         } else {
-            return "Gagal registrasi";
+            // If the query fails, return false
+            return false;
         }
     }
+    
     
 
 

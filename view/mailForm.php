@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Hubungi Admin</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="yes.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<?php include 'sidebar.php'; ?>
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-4 mail-form">

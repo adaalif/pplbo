@@ -83,10 +83,14 @@ class Mahasiswa_Model extends Database {
         return $result['nama'];
     }
     public function getAllMahasiswa($nim) {
-        $this->query('SELECT * FROM data_mahasiswa WHERE nim = :nim');
+        $this->query('SELECT data_mahasiswa.*, nim.nama 
+                      FROM data_mahasiswa 
+                      INNER JOIN nim ON data_mahasiswa.nim = nim.nim 
+                      WHERE data_mahasiswa.nim = :nim');
         $this->bind(':nim', $nim); 
         return $this->resultSet();
     }
+    
     
     public function checkLoginSession(){
         if (session_status() == PHP_SESSION_NONE) {

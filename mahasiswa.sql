@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 02:05 AM
+-- Generation Time: May 21, 2024 at 02:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,9 @@ CREATE TABLE `data_kelas_mahasiswa` (
 --
 
 INSERT INTO `data_kelas_mahasiswa` (`nim`, `kode_kelas`, `nilai`) VALUES
-('1', '2', ''),
-('1', '1', '');
+('1', '1', ''),
+('2', '1', ''),
+('1', '2', '');
 
 -- --------------------------------------------------------
 
@@ -49,18 +50,17 @@ INSERT INTO `data_kelas_mahasiswa` (`nim`, `kode_kelas`, `nilai`) VALUES
 
 CREATE TABLE `data_mahasiswa` (
   `nim` varchar(11) NOT NULL,
-  `nama` varchar(20) NOT NULL,
-  `tempat_lahir` varchar(20) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `alamat` varchar(20) NOT NULL
+  `tempat_lahir` varchar(20) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `alamat` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `data_mahasiswa`
 --
 
-INSERT INTO `data_mahasiswa` (`nim`, `nama`, `tempat_lahir`, `tanggal_lahir`, `alamat`) VALUES
-('1', 'alif', '', '2024-05-10', 'jdjdjddj');
+INSERT INTO `data_mahasiswa` (`nim`, `tempat_lahir`, `tanggal_lahir`, `alamat`) VALUES
+('1', '', '2024-05-10', 'jdjdjddj');
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE `nilai` (
   `nama` varchar(20) NOT NULL,
   `nim` varchar(20) NOT NULL,
   `kode_kelas` varchar(20) NOT NULL,
-  `nilai` varchar(3) NOT NULL
+  `nilai` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -134,7 +134,9 @@ CREATE TABLE `nilai` (
 --
 
 INSERT INTO `nilai` (`nama`, `nim`, `kode_kelas`, `nilai`) VALUES
-('alif', '1', '1', 'A');
+('alif', '1', '1', 'A'),
+('farid', '2', '1', 'E'),
+('alif', '1', '2', NULL);
 
 -- --------------------------------------------------------
 
@@ -154,7 +156,11 @@ CREATE TABLE `nim` (
 INSERT INTO `nim` (`nim`, `nama`) VALUES
 ('1', 'alif'),
 ('2', 'farid'),
-('3', 'rafli');
+('3', 'rafli'),
+('4', 'anissa'),
+('5', 'rama'),
+('6', '6'),
+('7', '7');
 
 -- --------------------------------------------------------
 
@@ -173,9 +179,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`password`, `nim`) VALUES
 ('1', '1'),
-('12', '12'),
 ('2', '2'),
-('3', '3');
+('3', '3'),
+('4', '4'),
+('5', '5'),
+('7', '7');
 
 -- --------------------------------------------------------
 
@@ -184,7 +192,7 @@ INSERT INTO `user` (`password`, `nim`) VALUES
 --
 
 CREATE TABLE `user_dosen` (
-  `nip` varchar(20) NOT NULL,
+  `nip` int(11) NOT NULL,
   `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -193,24 +201,31 @@ CREATE TABLE `user_dosen` (
 --
 
 INSERT INTO `user_dosen` (`nip`, `password`) VALUES
-('1', '1'),
-('2', '2'),
-('3', '3'),
-('4', '4'),
-('5', '5'),
-('6', '6'),
-('7', '7'),
-('8', '8'),
-('9', '9'),
-('10', '10'),
-('11', '11'),
-('12', '12'),
-('13', '13'),
-('14', '14');
+(1, '1'),
+(2, '2'),
+(3, '3'),
+(4, '4'),
+(5, '5'),
+(6, '6'),
+(7, '7'),
+(8, '8'),
+(9, '9'),
+(10, '10'),
+(11, '11'),
+(12, '12'),
+(13, '13'),
+(14, '14');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `data_kelas_mahasiswa`
+--
+ALTER TABLE `data_kelas_mahasiswa`
+  ADD KEY `nim` (`nim`),
+  ADD KEY `kode_kelas` (`kode_kelas`);
 
 --
 -- Indexes for table `data_mahasiswa`
@@ -228,7 +243,15 @@ ALTER TABLE `dosen`
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD UNIQUE KEY `kode_kelas` (`kode_kelas`);
+  ADD UNIQUE KEY `kode_kelas` (`kode_kelas`),
+  ADD KEY `nip` (`nip`);
+
+--
+-- Indexes for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD KEY `nim` (`nim`),
+  ADD KEY `kode_kelas` (`kode_kelas`);
 
 --
 -- Indexes for table `nim`
@@ -243,6 +266,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `nim` (`nim`);
 
 --
+-- Indexes for table `user_dosen`
+--
+ALTER TABLE `user_dosen`
+  ADD KEY `nip` (`nip`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -251,6 +280,48 @@ ALTER TABLE `user`
 --
 ALTER TABLE `dosen`
   MODIFY `nip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `data_kelas_mahasiswa`
+--
+ALTER TABLE `data_kelas_mahasiswa`
+  ADD CONSTRAINT `data_kelas_mahasiswa_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `nim` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `data_kelas_mahasiswa_ibfk_2` FOREIGN KEY (`kode_kelas`) REFERENCES `kelas` (`kode_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `data_mahasiswa`
+--
+ALTER TABLE `data_mahasiswa`
+  ADD CONSTRAINT `data_mahasiswa_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `nim` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `dosen` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nilai`
+--
+ALTER TABLE `nilai`
+  ADD CONSTRAINT `nilai_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `nim` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `nilai_ibfk_2` FOREIGN KEY (`kode_kelas`) REFERENCES `data_kelas_mahasiswa` (`kode_kelas`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nim`) REFERENCES `nim` (`nim`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `user_dosen`
+--
+ALTER TABLE `user_dosen`
+  ADD CONSTRAINT `user_dosen_ibfk_1` FOREIGN KEY (`nip`) REFERENCES `dosen` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,17 +1,12 @@
 <?php
-// Panggil file controller
 require_once '../contr/Mahasiswa_controller.php';
 
-// Buat objek dari kelas Mahasiswa_controller
 $controller = new Mahasiswa_controller();
 
-// Cek session login
 $controller->checkLoginSession();
 
-// Ambil NIM dari session
 $nim = $_SESSION['nim'];
 
-// Ambil data mahasiswa berdasarkan NIM
 $mahasiswa = $controller->getAllMahasiswa($nim);
 ?>
 
@@ -22,10 +17,7 @@ $mahasiswa = $controller->getAllMahasiswa($nim);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Mata Kuliah</title>
-    <!-- Tambahkan CSS sesuai kebutuhan -->
     <style>
-        /* Style CSS dapat ditambahkan di sini */
-        /* Contoh: */
         body {
             font-family: Arial, sans-serif;
         }
@@ -68,7 +60,7 @@ $mahasiswa = $controller->getAllMahasiswa($nim);
           </tr>
     </thead>
     <tbody>
-    <?php if (!empty($mahasiswa)): ?> <!-- Cek apakah ada data mahasiswa yang ditampilkan -->
+    <?php if (!empty($mahasiswa)): ?> 
         <?php foreach ($mahasiswa as $row): ?>
             <tr>
                 <td><?= $row['nim'] ?></td>
@@ -76,7 +68,7 @@ $mahasiswa = $controller->getAllMahasiswa($nim);
                 <td><?= $row['tempat_lahir'] ?></td>
                 <td><?= $row['tanggal_lahir'] ?></td>
                 <td><?= $row['alamat'] ?></td>
-                <td></td> <!-- Tambahkan link edit dengan parameter nim -->
+                <td></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

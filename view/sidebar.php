@@ -42,7 +42,7 @@
                 <select id="bantuanDropdown" class="nav-item">
                     <option selected disabled>Bantuan</option>
                     <option value="../user_manual.pdf">Panduan</option>
-                    <option value="../MailController/mailForm">Hubungi Admin</option>
+                    <option value="http://localhost/pplbo/core/hubAdmin.php">Hubungi Admin</option>
                 </select>
               </a>
               </li>

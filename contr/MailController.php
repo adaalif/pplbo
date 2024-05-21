@@ -8,12 +8,6 @@ class MailController {
         $this->mailModel = new MailModel();
     }
 
-    public function index($param) {
-        if ($param === 'mailForm') {
-            $this->view('mailForm');
-        }
-    }
-
     public function handleRequest() {
         $recipient = "vainqueursa@gmail.com";
         $sender = "From: vainqueursa@gmail.com";
@@ -32,11 +26,6 @@ class MailController {
         }
 
         include '../view/mailForm.php';
-    }
-
-    // Define the view method
-    private function view($viewName) {
-        include '../view/' . $viewName . '.php';
     }
 }
 ?>
